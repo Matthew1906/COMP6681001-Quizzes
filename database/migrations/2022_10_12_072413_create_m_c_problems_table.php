@@ -14,17 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('m_c_problems', function (Blueprint $table) {
-            $table->id('index');
+            $table->integer('index');
             $table->unsignedBigInteger('quiz_id');
-            $table->primary(["quiz_id","index"]);
-            $table->string('question');
+            $table->primary(["quiz_id", "index"]);
+            $table->string('question', 500);
             $table->string('answer');
             $table->string('choice1');
             $table->string('choice2');
             $table->string('choice3');
             $table->string('choice4');
             $table->foreign("quiz_id")->references("id")->on("quizzes")->onUpdate("cascade")->onDelete("cascade");
-
             $table->timestamps();
         });
     }

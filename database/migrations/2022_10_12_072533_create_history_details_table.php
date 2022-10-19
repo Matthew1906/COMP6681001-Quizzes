@@ -14,11 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('history_details', function (Blueprint $table) {
-            $table->integer('history_id');
-            $table->unsignedBigInteger('index');
+            $table->unsignedBigInteger('history_id');
+            $table->integer('index');
             $table->primary(["history_id","index"]);
             $table->foreign("history_id")->references("id")->on("quiz_histories")->onUpdate("cascade")->onDelete("cascade");
-
             $table->timestamps();
         });
     }
