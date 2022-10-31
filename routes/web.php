@@ -14,5 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home', ['signedIn'=>true]);
+});
+
+Route::get('/login', function () {
+    return view('home');
+});
+
+Route::get('/register', function () {
+    return view('home');
+});
+
+Route::get('/quiz', function () {
+    return view('home');
+});
+
+Route::get('/make-quiz', function () {
+    return view('home');
 });
