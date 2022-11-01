@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Nunito&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/base.css">
+    @yield('css')
 </head>
 
 <body class='w-100 vh-100 d-flex flex-column'>

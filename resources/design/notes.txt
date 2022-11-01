@@ -1,0 +1,7 @@
+1. Bikin UI dulu
+2. Semuanya route dan function di web.php dulu -> jgn di controller
+3. Semua content didalam section body
+4. Bootstrap -> https://getbootstrap.com/docs/5.2/getting-started/introduction/ -> lihat docs aja
+5. Sebisa mungkin pakai bootstrap
+6. Kalau bener bener gaada -> custom css per page -> bikin file css baru, connect sendiri -> refactor terakhir aja
+7. Icon -> https://ionic.io/ionicons

@@ -2,6 +2,10 @@
 
 @section('title', 'Home - Quizzes')
 
+{{-- @section('css')
+
+@endsection --}}
+
 @section('body')
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolorem pariatur excepturi consequuntur architecto
     dolore earum, temporibus officiis quae unde voluptas assumenda voluptate inventore tempora laboriosam totam voluptatem

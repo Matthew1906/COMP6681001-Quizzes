@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('fill_problems', function (Blueprint $table) {
             $table->integer('index');
+            $table->binary("image");
             $table->unsignedBigInteger('quiz_id');
             $table->primary(["quiz_id","index"]);
             $table->string('question', 500);
