@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Nunito&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href={{asset('css/base.css')}}>
     @yield('css')
 </head>
-
 <body class='w-100 vh-100 d-flex flex-column'>
     <header class="navbar navbar-dark navbar-expand-lg bg-turqouise text-primary px-3">
         <div class="container-fluid">
@@ -64,7 +62,7 @@
             </div>
         </div>
     </header>
-    <main class='p-3 p-lg-4 flex-grow-1 mb-1'>
+    <main class='p-3 p-lg-4 d-flex flex-grow-1 justify-content-center align-items-start bg-green'>
         @yield('body')
     </main>
     <footer class='container-fluid bg-turqouise p-3 d-flex justify-content-center align-items-center'>
@@ -76,7 +74,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
         integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous">
     </script>
-    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
 </body>
-
 </html>

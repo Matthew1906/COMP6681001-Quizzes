@@ -55,3 +55,16 @@
 .hover-pink:hover{
     color:#BF1363;;
 }
+
+.hover-bg-pink:hover{
+    background-color: #BF1363;
+}
+
+.hover-bg-orange:hover{
+    background-color: #F17300;
+}
+
+/* BORDER */
+.border-turqouise{
+    border-color: #368F8B;
+}
