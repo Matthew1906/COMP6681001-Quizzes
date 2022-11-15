@@ -18,12 +18,22 @@ Route::get('/', function () {
     return view('pages.home', ['signedIn'=>false]);
 })->name("home");
 
+/* Sathya */
+
 Route::get('/login', function () {
-    return view('pages.home');
+    return view('pages.login', ['signedIn'=>false]);
 });
 
 Route::get('/register', function () {
-    return view('pages.home');
+    return view('pages.register', ['signedIn'=>false]);
+});
+
+Route::get('/quizHistory', function () {
+    return view('pages.quiz-history', ['signedIn'=>true]);
+});
+
+Route::get('/profile', function () {
+    return view('pages.profile', ['signedIn'=>true]);
 });
 
 /* Matthew */
