@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('class_groups', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("role_id");
-            $table->foreign("role_id")->references("id")->on("user_roles")->onUpdate("cascade")->onDelete("cascade");
-            $table->string('full_name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->date("dob");
-            $table->rememberToken();
+            $table->string("name");
+            $table->string("description");
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('class_groups');
     }
 };

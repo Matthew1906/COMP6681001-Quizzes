@@ -1,0 +1,70 @@
+/* FONT */
+
+.text-primary{
+    font-family: 'Fjalla One', sans-serif;
+}
+
+.text-secondary{
+    font-family: 'Nunito', sans-serif;
+}
+
+/* COLOR */
+
+.text-turqouise{
+    color:#368F8B;
+}
+
+.bg-turqouise{
+    background-color:#368F8B;
+}
+
+.text-green{
+    color:#D5ECD4;
+}
+
+.bg-green{
+    background-color:#D5ECD4;
+}
+
+.text-black{
+    color: #090909;
+}
+
+.bg-black{
+    background-color: #090909;
+}
+
+.text-orange{
+    color:#F17300;
+}
+
+.bg-orange{
+    background-color:#F17300;
+}
+
+.text-pink{
+    color: #BF1363;
+}
+
+.bg-pink{
+    background-color: #BF1363;
+}
+
+/* HOVER */
+
+.hover-pink:hover{
+    color:#BF1363;;
+}
+
+.hover-bg-pink:hover{
+    background-color: #BF1363;
+}
+
+.hover-bg-orange:hover{
+    background-color: #F17300;
+}
+
+/* BORDER */
+.border-turqouise{
+    border-color: #368F8B;
+}
