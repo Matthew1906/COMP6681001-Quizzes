@@ -57,3 +57,12 @@ Route::get('/quiz/new/{question_type}', function ($question_type) {
 Route::fallback(function(){
     return redirect(route("home"));
 });
+
+/* Charles */
+Route::get('/contact', function () {
+    return view('pages.contact',['signedIn'=>false]);
+});
+
+Route::get('/dashboard', function(){
+    return view('pages.dashboard',['signedIn'=>true]);
+});

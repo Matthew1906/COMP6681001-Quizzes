@@ -36,7 +36,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">
+                        <a class="nav-link text-white" href="contact.blade.php">
                             <ion-icon name="mail"></ion-icon> CONTACT US
                         </a>
                     </li>
@@ -51,10 +51,10 @@
                     </h2>
                 @else
                     <div class='d-flex justify-content-start lg:justify-content-center text-secondary'>
-                        <a href="#" class='btn bg-white text-turqouise hover-pink fw-bold me-2 '>
+                        <a href="login.blade.php" class='btn bg-white text-turqouise hover-pink fw-bold me-2 '>
                             Login
                         </a>
-                        <a href="#" class='btn bg-white text-turqouise hover-pink fw-bold'>
+                        <a href="register.blade.php" class='btn bg-white text-turqouise hover-pink fw-bold'>
                             Register
                         </a>
                     </div>

@@ -1,5 +1,8 @@
 /* FONT */
-
+.text-third{
+    font-family: 'Fjalla One', sans-serif;
+    color:#BF1363;
+}
 .text-primary{
     font-family: 'Fjalla One', sans-serif;
 }
@@ -68,3 +71,28 @@
 .border-turqouise{
     border-color: #368F8B;
 }
+
+/* BUTTON */
+.button {
+    border-radius: 15%;
+    color: #BF1363;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .button1 {
+    background-color: white;
+    color:#BF1363;
+    border: 2px solid black;
+  }
+
+  .button1:hover {
+    background-color:#BF1363 ;
+    color: white;
+  }
