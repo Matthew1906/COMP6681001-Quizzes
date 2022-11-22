@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuizController;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
@@ -42,11 +43,14 @@ Route::get('/quiz', function () {
     return view('pages.quiz', ['signedIn'=>true, 'type'=>'mcq']); // mcq / ftb
 });
 
-Route::get('/quiz/new', function () {
-    return view('pages.make-quiz', ['signedIn'=>true]);
-});
+Route::get('/quizzes/new', [QuizController::class, 'create'])->name('create-quiz');
+Route::post('/quizzes/new', [QuizController::class, 'store'])->name('store-quiz');
+Route::get('/quizzes/{quiz_id}/edit', [QuizController::class, 'edit'])->name('edit-quiz');
+// Route::get('/quizzes/{quiz_id}/edit', function ($quiz_id) {
+//     return view('pages.edit-quiz', ['signedIn'=>true]);
+// });
 
-Route::get('/quiz/new/{question_type}', function ($question_type) {
+Route::get('/quizzes/{quiz_id}/edit/{question_type}', function ($question_type) {
     if($question_type == 'mcq' || $question_type == 'ftb'){
         return view('pages.make-question', ['signedIn'=>true, 'type'=>$question_type]); // mcq / ftb
     }

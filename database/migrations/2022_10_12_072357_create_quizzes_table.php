@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('description');
+            $table->boolean('status'); // 0 -> not finished, 1 -> released
             $table->boolean('repeat');
             $table->datetime('deadline');
             $table->timestamps();
