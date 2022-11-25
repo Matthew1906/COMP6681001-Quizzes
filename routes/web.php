@@ -51,11 +51,13 @@ Route::controller(QuizController::class)->group(function(){
     Route::post('/quizzes/{quiz_id}', 'save')->name('save-quiz');
 });
 
-Route::get('/quizzes/{quiz_id}/problems/{index}/{question_type}', [QuizProblemController::class, 'create'])->name('create-quiz-problem');
-Route::post('/quizzes/{quiz_id}/problems/{index}/{question_type}', [QuizProblemController::class, 'store'])->name('store-quiz-problem');
-Route::get('/quizzes/{quiz_id}/problems/{index}', [QuizProblemController::class, 'edit'])->name('edit-quiz-problem');
-Route::patch('/quizzes/{quiz_id}/problems/{index}', [QuizProblemController::class, 'update'])->name('update-quiz-problem');
-Route::delete('/quizzes/{quiz_id}/problems/{index}', [QuizProblemController::class, 'destroy'])->name('destroy-quiz-problem');
+Route::controller(QuizProblemController::class)->group(function(){
+    Route::get('/quizzes/{quiz_id}/problems/{index}/{question_type}', 'create')->name('create-quiz-problem');
+    Route::post('/quizzes/{quiz_id}/problems/{index}/{question_type}', 'store')->name('store-quiz-problem');
+    Route::get('/quizzes/{quiz_id}/problems/{index}', 'edit')->name('edit-quiz-problem');
+    Route::patch('/quizzes/{quiz_id}/problems/{index}', 'update')->name('update-quiz-problem');
+    Route::delete('/quizzes/{quiz_id}/problems/{index}', 'destroy')->name('destroy-quiz-problem');
+});
 
 Route::fallback(function(){
     return redirect(route("home"));
