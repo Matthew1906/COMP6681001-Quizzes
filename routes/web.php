@@ -66,3 +66,6 @@ Route::get('/contact', function () {
 Route::get('/dashboard', function(){
     return view('pages.dashboard',['signedIn'=>true]);
 });
+Route::get('/explore', function(){
+    return view('pages.explore',['signedIn'=>true]);
+});
