@@ -14,13 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('fill_problems', function (Blueprint $table) {
-            $table->integer('index');
-            $table->binary("image");
-            $table->unsignedBigInteger('quiz_id');
-            $table->primary(["quiz_id","index"]);
+            $table->id();
             $table->string('question', 500);
             $table->string('answer');
-            $table->foreign("quiz_id")->references("id")->on("quizzes")->onUpdate("cascade")->onDelete("cascade");
             $table->timestamps();
         });
     }

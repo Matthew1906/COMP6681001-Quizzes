@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\QuizController;
-use Illuminate\Support\Arr;
+use App\Http\Controllers\QuizProblemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,20 +43,19 @@ Route::get('/quiz', function () {
     return view('pages.quiz', ['signedIn'=>true, 'type'=>'mcq']); // mcq / ftb
 });
 
-Route::get('/quizzes/new', [QuizController::class, 'create'])->name('create-quiz');
-Route::post('/quizzes/new', [QuizController::class, 'store'])->name('store-quiz');
-Route::get('/quizzes/{quiz_id}/edit', [QuizController::class, 'edit'])->name('edit-quiz');
-// Route::get('/quizzes/{quiz_id}/edit', function ($quiz_id) {
-//     return view('pages.edit-quiz', ['signedIn'=>true]);
-// });
-
-Route::get('/quizzes/{quiz_id}/edit/{question_type}', function ($question_type) {
-    if($question_type == 'mcq' || $question_type == 'ftb'){
-        return view('pages.make-question', ['signedIn'=>true, 'type'=>$question_type]); // mcq / ftb
-    }
-    return redirect(route("home"));
+Route::controller(QuizController::class)->group(function(){
+    Route::get('/quizzes/new', 'create')->name('create-quiz');
+    Route::post('/quizzes/new', 'store')->name('store-quiz');
+    Route::get('/quizzes/{quiz_id}', 'edit')->name('edit-quiz');
+    Route::patch('/quizzes/{quiz_id}', 'update')->name('update-quiz');
+    Route::post('/quizzes/{quiz_id}', 'save')->name('save-quiz');
 });
 
+Route::get('/quizzes/{quiz_id}/problems/{index}/{question_type}', [QuizProblemController::class, 'create'])->name('create-quiz-problem');
+Route::post('/quizzes/{quiz_id}/problems/{index}/{question_type}', [QuizProblemController::class, 'store'])->name('store-quiz-problem');
+Route::get('/quizzes/{quiz_id}/problems/{index}', [QuizProblemController::class, 'edit'])->name('edit-quiz-problem');
+Route::patch('/quizzes/{quiz_id}/problems/{index}', [QuizProblemController::class, 'update'])->name('update-quiz-problem');
+Route::delete('/quizzes/{quiz_id}/problems/{index}', [QuizProblemController::class, 'destroy'])->name('destroy-quiz-problem');
 
 Route::fallback(function(){
     return redirect(route("home"));

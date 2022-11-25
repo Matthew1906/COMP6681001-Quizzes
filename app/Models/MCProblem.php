@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class MCProblem extends Model
 {
     use HasFactory;
+
+    public function problem()
+    {
+        return $this->morphOne(QuizProblem::class, 'problem');
+    }
 }
