@@ -74,13 +74,15 @@
         </div>
 </div>
 <br>
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center ">
-      <li class="page-item"><a class="page-link text-turqouise font-weight-bold" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link bg-turqouise text-white font-weight-bold" href="#">1</a></li>
-      <li class="page-item"><a class="page-link text-turqouise font-weight-bold" href="#">2</a></li>
-      <li class="page-item"><a class="page-link text-turqouise font-weight-bold" href="#">3</a></li>
-      <li class="page-item"><a class="page-link text-turqouise font-weight-bold" href="#">Next</a></li>
-    </ul>
-  </nav>
+<ul class="mt-2 pagination d-flex justify-content-center border border-2 border-turqouise">
+    <li class="page-item"><a class="page-link text-turqouise fs-4" href="#">1</a></li>
+    <li class="page-item"><a class="page-link text-turqouise fs-4" href="#">2</a></li>
+    <li class="page-item">
+        <span class="page-link text-turqouise fs-4">
+            <ion-icon name="ellipsis-horizontal" class="align-middle"></ion-icon>
+        </span>
+    </li>
+    <li class="page-item"><a class="page-link text-turqouise fs-4" href="#">5</a></li>
+    <li class="page-item"><a class="page-link text-turqouise fs-4" href="#">6</a></li>
+</ul>
 @endsection
