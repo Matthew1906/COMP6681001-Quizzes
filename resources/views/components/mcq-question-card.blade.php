@@ -1,6 +1,6 @@
 <div class="row g-3 align-items-center mt-1 pb-3 px-1">
     <div class="col-auto">
-        <input type="radio" name="@isset($solved){{"answer-".$prompt.'-'.$solved}} @else {{"answer"}} @endif" value={{$index}}  @isset($solved) disabled @endif @isset($answer) @if($answer) checked @endif @endif>
+        <input type="radio" name="@isset($solved){{"answer-".$prompt.'-'.$solved}}@else{{"answer"}}@endif" value={{$index}}  @isset($solved) disabled @endif @isset($answer) @if($answer) checked @endif @endif>
     </div>
     <div class="col-auto">
         @isset($solved)

@@ -13,4 +13,9 @@ class Quiz extends Model
     {
         return $this->hasMany(QuizProblem::class);
     }
+
+    public function histories()
+    {
+        return $this->hasMany(QuizHistory::class);
+    }
 }

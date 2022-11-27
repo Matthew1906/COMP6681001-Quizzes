@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\QuizProblemController;
+use App\Http\Controllers\QuizSimulation;
+use App\Http\Controllers\QuizSimulationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,6 +59,11 @@ Route::controller(QuizProblemController::class)->group(function(){
     Route::get('/quizzes/{quiz_id}/problems/{index}', 'edit')->name('edit-quiz-problem');
     Route::patch('/quizzes/{quiz_id}/problems/{index}', 'update')->name('update-quiz-problem');
     Route::delete('/quizzes/{quiz_id}/problems/{index}', 'destroy')->name('destroy-quiz-problem');
+});
+
+Route::controller(QuizSimulationController::class)->group(function(){
+    Route::get('/quizzes/{quiz_id}/simulation', 'start')->name('start-quiz');
+    Route::post('/quizzes/{quiz_id}/simulation/{index}', 'answer')->name('answer-quiz');
 });
 
 Route::fallback(function(){

@@ -5,64 +5,130 @@
 @section('body')
     <div class='px-2 text-center'>
         <h3 class='fs-2 fw-lighter mb-3'>54:12</h3>
-        <h2 class='p-3 bg-white border border-dark border-2 rounded'>1. What is the Capital City of Indonesia?</h2>
-        <img src="https://picsum.photos/300/200" class='mt-2 mb-4 border border-4 border-dark rounded'>
+        <h2 class='p-3 bg-white border border-dark border-2 rounded'>{{ $problems[0]->problem->question }}</h2>
+        @if ($problems[0]->image)
+            <img src="{{ asset('storage/quizzes/' . $problems[0]->image) }}"
+                class='mw-100 h-auto mt-2 mb-4 border border-4 border-dark rounded'>
+        @endif
         <div class='d-flex justify-content-center align-items-center'>
-            <a href="" class='text-black'>
-                <ion-icon name="arrow-back-circle-outline" class='fs-1'></ion-icon>
-            </a>
-            @if($type=='mcq')
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        @includeIf('components.mcq-answer-card', [
-                            'number' => 'A',
-                            'answer' => 'Jakarta',
-                            'color' => 'danger',
-                        ])
-                    </div>
-                    <div class="col">
-                        @includeIf('components.mcq-answer-card', [
-                            'number' => 'C',
-                            'answer' => 'Palopo',
-                            'color' => 'warning',
-                        ])
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        @includeIf('components.mcq-answer-card', [
-                            'number' => 'B',
-                            'answer' => 'Bandung',
-                            'color' => 'success',
-                        ])
-                    </div>
-                    <div class="col">
-                        @includeIf('components.mcq-answer-card', [
-                            'number' => 'D',
-                            'answer' => 'Banda Aceh',
-                            'color' => 'info',
-                        ])
-                    </div>
-                </div>
-            </div>
-            @else
-                @includeIf('components.ftb-answer-card')
+            @if ($problems->currentPage() > 1)
+                <a href="{{ $problems->previousPageUrl() }}" class='text-black'>
+                    <ion-icon name="arrow-back-circle-outline" class='fs-1'></ion-icon>
+                </a>
             @endif
-            <a href="" class='text-black'>
-                <ion-icon name="arrow-forward-circle-outline" class='fs-1'></ion-icon>
-            </a>
+            @if ($problems[0]->problem_type == 'App\Models\MCProblem')
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <form
+                                action="{{ route('answer-quiz', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }}"
+                                method="post">
+                                @csrf
+                                @includeIf('components.mcq-answer-card', [
+                                    'number' => 'A',
+                                    'answer' => $problems[0]->problem->choice1,
+                                    'color' => 'danger',
+                                    'index' => 1,
+                                    'page' => $problems->currentPage()
+                                ])
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form
+                                action="{{ route('answer-quiz', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }}"
+                                method="post">
+                                @csrf
+                                @includeIf('components.mcq-answer-card', [
+                                    'number' => 'C',
+                                    'answer' => $problems[0]->problem->choice3,
+                                    'color' => 'warning',
+                                    'index' => 3,
+                                    'page' => $problems->currentPage()
+                                ])
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <form
+                                action="{{ route('answer-quiz', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }}"
+                                method="post">
+                                @csrf
+                                @includeIf('components.mcq-answer-card', [
+                                    'number' => 'B',
+                                    'answer' => $problems[0]->problem->choice2,
+                                    'color' => 'success',
+                                    'index' => 2,
+                                    'page' => $problems->currentPage()
+                                ])
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form
+                                action="{{ route('answer-quiz', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }}"
+                                method="post">
+                                @csrf
+                                @includeIf('components.mcq-answer-card', [
+                                    'number' => 'D',
+                                    'answer' => $problems[0]->problem->choice4,
+                                    'color' => 'info',
+                                    'index' => 4,
+                                    'page' => $problems->currentPage()
+                                ])
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @else
+                @includeIf('components.ftb-answer-card', [
+                    'path' => route('answer-quiz', [
+                        'quiz_id' => $problems[0]->quiz_id,
+                        'index' => $problems[0]->index,
+                    ]),
+                    'page' => $problems->currentPage()
+                ])
+            @endif
+            @if ($problems->currentPage() < $problems->lastPage())
+                <a href="{{ $problems->nextPageUrl() }}" class='text-black'>
+                    <ion-icon name="arrow-forward-circle-outline" class='fs-1'></ion-icon>
+                </a>
+            @endif
         </div>
+        @php
+        $details = $problems[0]->quiz->histories->filter(function($value, $key){
+            return $value['user_id'] == 1;
+        })[0]->details;
+        $answers = [];
+        foreach($details as $detail){
+            if($detail['index'] == Request::query('page')){
+                $answers[] = $detail;
+            }
+        };
+        $curr = collect($answers)->first();
+        @endphp
+        @if($curr)
+            Your Answer = {{$curr['answer']}}
+        @endif
         <ul class="mt-2 pagination d-flex justify-content-center border border-2 border-turqouise">
-            <li class="page-item"><a class="page-link text-turqouise fs-4" href="#">1</a></li>
-            <li class="page-item"><a class="page-link text-turqouise fs-4" href="#">2</a></li>
-            <li class="page-item">
-                <span class="page-link text-turqouise fs-4">
-                    <ion-icon name="ellipsis-horizontal" class="align-middle"></ion-icon>
-                </span>
-            </li>
-            <li class="page-item"><a class="page-link text-turqouise fs-4" href="#">5</a></li>
-            <li class="page-item"><a class="page-link text-turqouise fs-4" href="#">6</a></li>
+            <li class="page-item"><a class="page-link text-turqouise fs-4" href="{{ $problems->url(1) }}">1</a></li>
+            @if ($problems->lastPage() >= 2)
+                <li class="page-item"><a class="page-link text-turqouise fs-4" href="{{ $problems->url(2) }}">2</a></li>
+            @endif
+            @if ($problems->lastPage() > 4)
+                <li class="page-item">
+                    <span class="page-link text-turqouise fs-4">
+                        <ion-icon name="ellipsis-horizontal" class="align-middle"></ion-icon>
+                    </span>
+                </li>
+            @endif
+            @if ($problems->lastPage() > 3)
+                <li class="page-item"><a class="page-link text-turqouise fs-4"
+                        href="{{ $problems->url($problems->lastPage() - 1) }}">{{ $problems->lastPage() - 1 }}</a></li>
+            @endif
+            @if ($problems->lastPage() >= 4)
+                <li class="page-item"><a class="page-link text-turqouise fs-4"
+                        href="{{ $problems->url($problems->lastPage()) }}">{{ $problems->lastPage() }}</a></li>
+            @endif
         </ul>
     </div>
 @endsection

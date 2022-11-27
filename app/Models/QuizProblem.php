@@ -13,4 +13,9 @@ class QuizProblem extends Model
     {
         return $this->morphTo();
     }
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
+    }
 }

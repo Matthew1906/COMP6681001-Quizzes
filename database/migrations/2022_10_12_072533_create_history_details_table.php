@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('index');
             $table->primary(["history_id","index"]);
             $table->foreign("history_id")->references("id")->on("quiz_histories")->onUpdate("cascade")->onDelete("cascade");
+            $table->string("answer"); // stores the user's answer
             $table->timestamps();
         });
     }
