@@ -5,11 +5,25 @@
 @section('body')
     <div class='px-2 text-center'>
         <h3 class='fs-2 fw-lighter mb-3'>54:12</h3>
+        @include('components.flash-messages')
         <h2 class='p-3 bg-white border border-dark border-2 rounded'>{{ $problems[0]->problem->question }}</h2>
         @if ($problems[0]->image)
             <img src="{{ asset('storage/quizzes/' . $problems[0]->image) }}"
                 class='mw-100 h-auto mt-2 mb-4 border border-4 border-dark rounded'>
         @endif
+        @php
+        $dict = ['1'=>'A', '2'=>'B', '3'=>'C', '4'=>'D'];
+        $details = $problems[0]->quiz->histories->filter(function($value, $key){
+            return $value['user_id'] == 1;
+        })[0]->details;
+        $answers = [];
+        foreach($details as $detail){
+            if($detail['index'] == Request::query('page')){
+                $answers[] = $detail;
+            }
+        };
+        $curr = collect($answers)->first();
+        @endphp
         <div class='d-flex justify-content-center align-items-center'>
             @if ($problems->currentPage() > 1)
                 <a href="{{ $problems->previousPageUrl() }}" class='text-black'>
@@ -29,7 +43,6 @@
                                     'answer' => $problems[0]->problem->choice1,
                                     'color' => 'danger',
                                     'index' => 1,
-                                    'page' => $problems->currentPage()
                                 ])
                             </form>
                         </div>
@@ -43,7 +56,6 @@
                                     'answer' => $problems[0]->problem->choice3,
                                     'color' => 'warning',
                                     'index' => 3,
-                                    'page' => $problems->currentPage()
                                 ])
                             </form>
                         </div>
@@ -59,7 +71,6 @@
                                     'answer' => $problems[0]->problem->choice2,
                                     'color' => 'success',
                                     'index' => 2,
-                                    'page' => $problems->currentPage()
                                 ])
                             </form>
                         </div>
@@ -72,11 +83,13 @@
                                     'number' => 'D',
                                     'answer' => $problems[0]->problem->choice4,
                                     'color' => 'info',
-                                    'index' => 4,
-                                    'page' => $problems->currentPage()
+                                    'index' => 4
                                 ])
                             </form>
                         </div>
+                    </div>
+                    <div class="row mt-2">
+                        <h4>Your Answer: {{$curr?$dict[$curr['answer']]:'No Answer'}}</h4>
                     </div>
                 </div>
             @else
@@ -85,7 +98,7 @@
                         'quiz_id' => $problems[0]->quiz_id,
                         'index' => $problems[0]->index,
                     ]),
-                    'page' => $problems->currentPage()
+                    'old'=> $curr?$curr['answer']:"",
                 ])
             @endif
             @if ($problems->currentPage() < $problems->lastPage())
@@ -94,21 +107,6 @@
                 </a>
             @endif
         </div>
-        @php
-        $details = $problems[0]->quiz->histories->filter(function($value, $key){
-            return $value['user_id'] == 1;
-        })[0]->details;
-        $answers = [];
-        foreach($details as $detail){
-            if($detail['index'] == Request::query('page')){
-                $answers[] = $detail;
-            }
-        };
-        $curr = collect($answers)->first();
-        @endphp
-        @if($curr)
-            Your Answer = {{$curr['answer']}}
-        @endif
         <ul class="mt-2 pagination d-flex justify-content-center border border-2 border-turqouise">
             <li class="page-item"><a class="page-link text-turqouise fs-4" href="{{ $problems->url(1) }}">1</a></li>
             @if ($problems->lastPage() >= 2)
@@ -130,5 +128,15 @@
                         href="{{ $problems->url($problems->lastPage()) }}">{{ $problems->lastPage() }}</a></li>
             @endif
         </ul>
+        @if($problems->currentPage() == $problems->lastPage())
+        {{-- {{ route('answer-quiz', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }} --}}
+        <form action="{{route('finish-quiz', ['quiz_id'=>$problems[0]->quiz_id])}}" method='POST'>
+            @csrf
+            @method('PATCH')
+            <button class='btn bg-turqouise text-white hover-bg-pink justify-content-center align-items-center fs-5'>
+                Finish Quiz
+            </button>
+        </form>
+        @endif
     </div>
 @endsection

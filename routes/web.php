@@ -64,6 +64,7 @@ Route::controller(QuizProblemController::class)->group(function(){
 Route::controller(QuizSimulationController::class)->group(function(){
     Route::get('/quizzes/{quiz_id}/simulation', 'start')->name('start-quiz');
     Route::post('/quizzes/{quiz_id}/simulation/{index}', 'answer')->name('answer-quiz');
+    Route::patch('/quizzes/{quiz_id}/simulation', 'finish')->name('finish-quiz');
 });
 
 Route::fallback(function(){

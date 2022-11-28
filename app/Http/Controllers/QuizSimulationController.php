@@ -34,6 +34,18 @@ class QuizSimulationController extends Controller
         else{
             HistoryDetail::where('history_id', '=', $history->id)->where('index', '=', $index)->update(['answer'=>$req->answer]);
         }
-        return redirect(route('start-quiz', ['quiz_id'=>$quiz_id])."?page=".$req->page);
+        return back();
+    }
+
+    public function finish($quiz_id)
+    {
+        $problems = QuizProblem::where('quiz_id', '=', $quiz_id)->get();
+        $history = QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', 1)->first();
+        $details = HistoryDetail::where('history_id', '=', $history->id)->get();
+        if($problems->count() == $details->count()){
+            QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', 1)->update(['status'=>1]);
+            return redirect(route('home'));
+        }
+        return back()->with('error', 'You need to answer all questions first!!');
     }
 }
