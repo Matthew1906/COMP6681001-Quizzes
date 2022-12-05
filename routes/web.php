@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Support\Arr;
+use App\Http\Controllers\QuizController;
+use App\Http\Controllers\QuizProblemController;
+use App\Http\Controllers\QuizSimulation;
+use App\Http\Controllers\QuizSimulationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,17 +45,27 @@ Route::get('/quiz', function () {
     return view('pages.quiz', ['signedIn'=>true, 'type'=>'mcq']); // mcq / ftb
 });
 
-Route::get('/quiz/new', function () {
-    return view('pages.make-quiz', ['signedIn'=>true]);
+Route::controller(QuizController::class)->group(function(){
+    Route::get('/quizzes/new', 'create')->name('create-quiz');
+    Route::post('/quizzes/new', 'store')->name('store-quiz');
+    Route::get('/quizzes/{quiz_id}', 'edit')->name('edit-quiz');
+    Route::patch('/quizzes/{quiz_id}', 'update')->name('update-quiz');
+    Route::post('/quizzes/{quiz_id}', 'save')->name('save-quiz');
 });
 
-Route::get('/quiz/new/{question_type}', function ($question_type) {
-    if($question_type == 'mcq' || $question_type == 'ftb'){
-        return view('pages.make-question', ['signedIn'=>true, 'type'=>$question_type]); // mcq / ftb
-    }
-    return redirect(route("home"));
+Route::controller(QuizProblemController::class)->group(function(){
+    Route::get('/quizzes/{quiz_id}/problems/{index}/{question_type}', 'create')->name('create-quiz-problem');
+    Route::post('/quizzes/{quiz_id}/problems/{index}/{question_type}', 'store')->name('store-quiz-problem');
+    Route::get('/quizzes/{quiz_id}/problems/{index}', 'edit')->name('edit-quiz-problem');
+    Route::patch('/quizzes/{quiz_id}/problems/{index}', 'update')->name('update-quiz-problem');
+    Route::delete('/quizzes/{quiz_id}/problems/{index}', 'destroy')->name('destroy-quiz-problem');
 });
 
+Route::controller(QuizSimulationController::class)->group(function(){
+    Route::get('/quizzes/{quiz_id}/simulation', 'start')->name('start-quiz');
+    Route::post('/quizzes/{quiz_id}/simulation/{index}', 'answer')->name('answer-quiz');
+    Route::patch('/quizzes/{quiz_id}/simulation', 'finish')->name('finish-quiz');
+});
 
 Route::fallback(function(){
     return redirect(route("home"));

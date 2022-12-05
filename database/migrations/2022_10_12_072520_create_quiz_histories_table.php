@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('quiz_id');
+            $table->boolean('status'); // 0 started, 1 submitted (already has score)
             $table->foreign("user_id")->references("id")->on("users")->onUpdate("cascade")->onDelete("cascade");
             $table->foreign("quiz_id")->references("id")->on("quizzes")->onUpdate("cascade")->onDelete("cascade");
             $table->timestamps();

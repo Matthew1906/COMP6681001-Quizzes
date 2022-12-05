@@ -5,12 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FillProblem extends Model
+class QuizProblem extends Model
 {
     use HasFactory;
 
     public function problem()
     {
-        return $this->morphOne(QuizProblem::class, 'problem');
+        return $this->morphTo();
+    }
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
     }
 }
