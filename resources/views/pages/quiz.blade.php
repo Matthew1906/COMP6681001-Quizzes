@@ -18,7 +18,7 @@
         })[0]->details;
         $answers = [];
         foreach($details as $detail){
-            if($detail['index'] == Request::query('page')){
+            if($detail['index'] == Request::query('page', 1)){
                 $answers[] = $detail;
             }
         };
