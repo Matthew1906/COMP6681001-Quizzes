@@ -69,3 +69,15 @@ Route::get('/dashboard', function(){
 Route::get('/explore', function(){
     return view('pages.explore',['signedIn'=>true]);
 });
+
+/* Bryan D */
+Route::get('/my-class', function () {
+    return view('pages.my-class',['signedIn'=>true]);
+});
+
+Route::get('/my-classes', function(){
+    return view('pages.my-classes',['signedIn'=>true]);
+});
+Route::get('/my-class/quiz-history', function(){
+    return view('pages.my-class-quiz-history',['signedIn'=>true]);
+});
