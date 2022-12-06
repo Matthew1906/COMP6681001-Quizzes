@@ -23,13 +23,13 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarNav">
                 <ul class="navbar-nav fs-5">
-                    @if($signedIn)
+                    @auth
                     <li class="nav-item">
                         <a class="nav-link text-white active" aria-current="page" href="#">
                             <ion-icon name="people" size='medium'></ion-icon> MY CLASS
                         </a>
                     </li>
-                    @endif
+                    @endauth
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">
                             <ion-icon name="rocket"></ion-icon> EXPLORE
@@ -41,24 +41,24 @@
                         </a>
                     </li>
                 </ul>
-                @if($signedIn)
+                @auth
                     <h2 class='text-white fs-5 fw-lighter mt-2 lg:mt-0'>
                         Welcome Back
                         <span class='fw-bold'>
-                            <a href='#' class='text-decoration-none text-white'>Johnny</a>
+                            <a href='#' class='text-decoration-none text-white'>{{Auth::user()->full_name}}</a>
                         </span>
                         !
                     </h2>
                 @else
                     <div class='d-flex justify-content-start lg:justify-content-center text-secondary'>
-                        <a href="login.blade.php" class='btn bg-white text-turqouise hover-pink fw-bold me-2 '>
+                        <a href="{{ route('login') }}" class='btn bg-white text-turqouise hover-pink fw-bold me-2 '>
                             Login
                         </a>
-                        <a href="register.blade.php" class='btn bg-white text-turqouise hover-pink fw-bold'>
+                        <a href="{{ route('register') }}" class='btn bg-white text-turqouise hover-pink fw-bold'>
                             Register
                         </a>
                     </div>
-                @endif
+                @endauth
             </div>
         </div>
     </header>

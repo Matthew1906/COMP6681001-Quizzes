@@ -8,7 +8,7 @@
                         <div class="row w-50 text-center align-items-center">
                             <h2 class="text-success fw-bold">Profile</h2>
                             <div class="d-flex flex-column align-items-center bg-pink mb-3 py-3 px-5 border border-2 border-dark rounded">
-                                <h4 class="text-white">Student: Johnny</h4>
+                                <h4 class="text-white">Student: {{Auth::user()->full_name}}</h4>
                                 <h4 class="text-white">Class: A</h4>
                             </div>
                         </div>
