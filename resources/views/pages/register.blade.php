@@ -34,7 +34,7 @@
                     <option value= 1 >Teacher</option>
                   </select>
             </div>
-            <button type="submit" href="{{ route('login') }} class="btn btn-light border border-2 border-dark mt-3 text-pink fw-bold fs-6">Register</button>
+            <button type="submit" href="{{ route('login') }}" class="btn btn-light border border-2 border-dark mt-3 text-pink fw-bold fs-6">Register</button>
         </form>
         <h2 class="fw-bold fs-4 text-center py-3">-----------------OR-----------------</h2>
         <div class="row text-center">
