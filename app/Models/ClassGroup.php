@@ -11,6 +11,6 @@ class ClassGroup extends Model
 
     public function members()
     {
-        return $this->belongsToMany(User::class, 'user_class', 'class_id', 'user_id');
+        return $this->belongsToMany(User::class, 'user_classes', 'class_id', 'user_id');
     }
 }

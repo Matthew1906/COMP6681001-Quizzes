@@ -52,7 +52,9 @@
         <img src="https://i.ibb.co/JqGF3dY/pngwing-com.png"  width="200px" height="200px" alt="">
         <br>
         <br>
-        <h3 class= "text-primary text-black text-center font-weight-bold">Hello Johny Lawrence</h3>
+        @auth
+        <h3 class= "text-primary text-black text-center font-weight-bold">Hello {{ Auth::user()->full_name }}</h3>
+        @endauth
         <br>
         <a href ="#">
         <button type="button" class='btn btn-primary btn-lg btn-block bg-turqouise text-primary text-white hover-bg-pink justify-content-center align-items-center'>SEE PROFILE DETAILS</button>
