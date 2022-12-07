@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\QuizProblemController;
-use App\Http\Controllers\QuizSimulation;
 use App\Http\Controllers\QuizSimulationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -77,10 +76,6 @@ Route::fallback(function(){
 /* Charles */
 Route::get('/contact', function () {
     return view('pages.contact',['signedIn'=>false]);
-});
-
-Route::get('/dashboard', function(){
-
 });
 
 Route::get('/explore', function(){
