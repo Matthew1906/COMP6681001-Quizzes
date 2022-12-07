@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function classes()
     {
-        return $this->belongsToMany(ClassGroup::class, 'user_class', 'user_id', 'class_id');
+        return $this->belongsToMany(ClassGroup::class, 'user_classes', 'user_id', 'class_id');
     }
 
     public function history()
