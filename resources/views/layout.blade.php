@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Nunito&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href={{asset('css/base.css')}}>
+    <link rel="stylesheet" href={{ asset('css/base.css') }}>
     @yield('css')
 </head>
+
 <body class='w-100 vh-100 d-flex flex-column'>
     <header class="navbar navbar-dark navbar-expand-lg bg-turqouise text-primary px-3">
         <div class="container-fluid">
@@ -24,11 +26,11 @@
             <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarNav">
                 <ul class="navbar-nav fs-5">
                     @auth
-                    <li class="nav-item">
-                        <a class="nav-link text-white active" aria-current="page" href="#">
-                            <ion-icon name="people" size='medium'></ion-icon> MY CLASS
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white active" aria-current="page" href="#">
+                                <ion-icon name="people" size='medium'></ion-icon> MY CLASS
+                            </a>
+                        </li>
                     @endauth
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">
@@ -42,13 +44,28 @@
                     </li>
                 </ul>
                 @auth
-                    <h2 class='text-white fs-5 fw-lighter mt-2 lg:mt-0'>
-                        Welcome Back
-                        <span class='fw-bold'>
-                            <a href='#' class='text-decoration-none text-white'>{{Auth::user()->full_name}}</a>
-                        </span>
-                        !
-                    </h2>
+                    <div class="dropdown">
+                        <h2 class='text-white fs-5 fw-lighter mt-2 lg:mt-0 dropdown-toggle' role='button' data-bs-toggle="dropdown" aria-expanded="false">
+                            Welcome Back
+                            <span class='fw-bold'>
+                                <a href='#' class='text-decoration-none text-white'>{{ Auth::user()->full_name }}</a>
+                            </span>
+                            !
+                        </h2>
+                        <ul class='dropdown-menu dropdown-menu-end'>
+                            <li>
+                                <a href="{{ route('profile') }}" class='dropdown-item btn bg-white text-turqouise hover-pink fs-5'>Profile</a>
+                            </li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST" class='m-0'>
+                                    @csrf
+                                    <button class='dropdown-item btn bg-white text-turqouise hover-pink fs-5'>
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 @else
                     <div class='d-flex justify-content-start lg:justify-content-center text-secondary'>
                         <a href="{{ route('login') }}" class='btn bg-white text-turqouise hover-pink fw-bold me-2 '>
@@ -76,4 +93,5 @@
     </script>
     <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
 </body>
+
 </html>

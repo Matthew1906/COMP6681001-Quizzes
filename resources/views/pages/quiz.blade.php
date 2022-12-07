@@ -4,7 +4,7 @@
 
 @section('body')
     <div class='px-2 text-center'>
-        <h3 class='fs-2 fw-lighter mb-3'>54:12</h3>
+        <h3 class='fs-2 fw-lighter mb-3'><span class='fw-bold'>Due Date: </span>{{ \Carbon\Carbon::parse($problems[0]->quiz->deadline)->format('l, d F Y - H:i')}}</h3>
         @include('components.flash-messages')
         <h2 class='p-3 bg-white border border-dark border-2 rounded'>{{ $problems[0]->problem->question }}</h2>
         @if ($problems[0]->image)

@@ -19,25 +19,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.home', ['signedIn'=>false]);
-})->name("home");
+    return view('pages.dashboard');
+})->name("home")->middleware("auth");
 
 /* Sathya */
 
-// Route::get('/login', function () {
-//     return view('pages.login', ['signedIn'=>false]);
-// });
-
 Route::get('login', [UserController::class, 'login'])->name('login');
 Route::post('login', [UserController::class, 'login_user'])->name('login_user');
-
-// Route::get('/register', function () {
-//     return view('pages.register', ['signedIn'=>false]);
-// });
-
 Route::get('register', [UserController::class, 'register'])->name('register');
 Route::post('register', [UserController::class, 'register_user'])->name('register_user');
-
+Route::post('logout', [UserController::class, 'logout'])->name("logout");
 
 Route::get('/quizHistory', function () {
     return view('pages.quiz-history', ['signedIn'=>true]);
@@ -45,7 +36,7 @@ Route::get('/quizHistory', function () {
 
 Route::get('/profile', function () {
     return view('pages.profile', ['signedIn'=>true]);
-});
+})->name("profile");
 
 /* Matthew */
 
@@ -75,6 +66,10 @@ Route::controller(QuizSimulationController::class)->group(function(){
     Route::patch('/quizzes/{quiz_id}/simulation', 'finish')->name('finish-quiz');
 });
 
+Route::get("/403", function(){
+    return view("errors.unauthorized");
+})->name("errors.unauthorized");
+
 Route::fallback(function(){
     return redirect(route("home"));
 });
@@ -85,8 +80,9 @@ Route::get('/contact', function () {
 });
 
 Route::get('/dashboard', function(){
-    return view('pages.dashboard',['signedIn'=>true]);
+
 });
+
 Route::get('/explore', function(){
     return view('pages.explore',['signedIn'=>true]);
 });

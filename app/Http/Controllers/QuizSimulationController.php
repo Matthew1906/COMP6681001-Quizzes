@@ -3,13 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\HistoryDetail;
+use App\Models\Quiz;
 use App\Models\QuizHistory;
 use App\Models\QuizProblem;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class QuizSimulationController extends Controller
 {
     public function start($quiz_id){
+        $quiz = Quiz::find($quiz_id);
+        if(Carbon::now()>$quiz->deadline){
+            return redirect(route('home'));
+        }
         $problems = QuizProblem::where('quiz_id', '=', $quiz_id)->paginate(1);
         if(!QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', 1)->first()){
             $new_history = new QuizHistory;
@@ -22,6 +28,10 @@ class QuizSimulationController extends Controller
     }
 
     public function answer($quiz_id, $index, Request $req){
+        $quiz = Quiz::find($quiz_id);
+        if(Carbon::now()>$quiz->deadline){
+            return redirect(route('home'));
+        }
         $req->validate(["answer"=>'required']);
         $history = QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', 1)->first();
         if(!HistoryDetail::where('history_id', '=', $history->id)->where('index', '=', $index)->first()){

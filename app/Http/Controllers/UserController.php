@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +18,7 @@ class UserController extends Controller
         $request->validate([
             'role_id' => 'required',
             'full_name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
             'dob' => 'required'
         ]);
@@ -35,7 +34,7 @@ class UserController extends Controller
         $user->save();
 
         $data['title'] = 'Register';
-        return view('pages.register', $data);
+        return redirect(route("login"));
     }
 
     public function login() {
@@ -47,13 +46,12 @@ class UserController extends Controller
     {
         $data['title'] = 'Login';
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
-            // return redirect()->intended('/');
-            return view('pages.login', $data);
+            return redirect(route("home"));
         }
 
         return back()->withErrors([
@@ -61,5 +59,9 @@ class UserController extends Controller
         ]);
     }
 
+    public function logout(){
+        auth()->logout();
+        return redirect(route('home'));
+    }
 
 }
