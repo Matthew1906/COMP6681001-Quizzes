@@ -44,6 +44,7 @@ Route::get('/quiz', function () {
 });
 
 Route::controller(QuizController::class)->group(function(){
+    Route::get("/quizzes", "index")->name("index-quiz");
     Route::get('/quizzes/new', 'create')->name('create-quiz');
     Route::post('/quizzes/new', 'store')->name('store-quiz');
     Route::get('/quizzes/{quiz_id}', 'edit')->name('edit-quiz');

@@ -10,6 +10,12 @@ use Illuminate\Support\Arr;
 class QuizController extends Controller
 {
 
+    function index()
+    {
+        $quizzes = Quiz::where('status', '=', 1)->get();
+        return view("pages.explore", ['quizzes' => $quizzes]);
+    }
+
     function create(){
         return view('pages.make-quiz', ['signedIn'=>true]);
     }

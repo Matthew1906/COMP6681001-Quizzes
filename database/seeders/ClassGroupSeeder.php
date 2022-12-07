@@ -18,13 +18,13 @@ class ClassGroupSeeder extends Seeder
     {
         DB::table("class_groups")->insert([
             [
-                'name'=>'Class A',
+                'name'=>'A',
                 'description'=>'Class A, Led by Mr. Charles',
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString(),
             ],
             [
-                'name'=>'Class B',
+                'name'=>'B',
                 'description'=>'Class B, Led by Lord Djoni',
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString(),

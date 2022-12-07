@@ -9,6 +9,11 @@ class Quiz extends Model
 {
     use HasFactory;
 
+    public function classes()
+    {
+        return $this->belongsToMany(ClassGroup::class, 'quiz_classes');
+    }
+
     public function problems()
     {
         return $this->hasMany(QuizProblem::class);

@@ -13,4 +13,9 @@ class ClassGroup extends Model
     {
         return $this->belongsToMany(User::class, 'user_classes', 'class_id', 'user_id');
     }
+
+    public function quizzes()
+    {
+        return $this->belongsToMany(Quiz::class, 'quiz_classes');
+    }
 }

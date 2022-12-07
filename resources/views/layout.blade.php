@@ -33,7 +33,7 @@
                         </li>
                     @endauth
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">
+                        <a class="nav-link text-white" href="{{route('index-quiz')}}">
                             <ion-icon name="rocket"></ion-icon> EXPLORE
                         </a>
                     </li>
