@@ -9,6 +9,11 @@ class QuizHistory extends Model
 {
     use HasFactory;
 
+    public function participant()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function details()
     {
         return $this->hasMany(HistoryDetail::class, "history_id");

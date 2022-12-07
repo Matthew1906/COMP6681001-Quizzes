@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ClassGroup extends Model
 {
     use HasFactory;
+
+    public function members()
+    {
+        return $this->belongsToMany(User::class, 'user_class', 'class_id', 'user_id');
+    }
 }
