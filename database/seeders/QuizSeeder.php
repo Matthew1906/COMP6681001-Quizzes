@@ -19,6 +19,7 @@ class QuizSeeder extends Seeder
         DB::table("quizzes")->insert([
             [
                 'name'=>'Introduction to Mathematics',
+                'class_id'=>1,
                 'description'=>'Welcome to Mathematics!! Try out this test to measure your logic and counting skills!!',
                 'status'=>1,
                 'repeat'=>0,
@@ -28,6 +29,7 @@ class QuizSeeder extends Seeder
             ],
             [
                 'name'=>'Multiplication and Division',
+                'class_id'=>1,
                 'description'=>"Let's test out your multiplication and division skills!!",
                 'status'=>1,
                 'repeat'=>0,
@@ -37,6 +39,7 @@ class QuizSeeder extends Seeder
             ],
             [
                 'name'=>'Majapahit Quiz',
+                'class_id'=>2,
                 'description'=>'Test out your memory and understanding of the history of Majapahit Kingdom',
                 'status'=>1,
                 'repeat'=>0,

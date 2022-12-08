@@ -2,18 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassGroup;
 use App\Models\Quiz;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class QuizController extends Controller
 {
-
-    function index()
+    function index(Request $req)
     {
-        $quizzes = Quiz::where('status', '=', 1)->get();
-        return view("pages.explore", ['quizzes' => $quizzes]);
+        if(Auth::check()){
+            $classes = ClassGroup::whereRelation('students', 'id', '=', Auth::id())->pluck('id');
+            $quizzes = Quiz::where('status', '=', 1)->where('deadline', '>', Carbon::now())
+                ->whereIn('class_id', $classes)->withCount('histories');
+        }
+        else{
+            $quizzes = Quiz::where('status', '=', 1)->where('deadline', '>', Carbon::now())
+                ->withCount('histories');
+        }
+        if($req->has('search') && Str::of($req->query('search'))->trim()!=''){
+            $search = Str::of($req->query('search'))->trim();
+            $quizzes = $quizzes->where('name', 'like', "%".$search."%");
+        }
+        return view("pages.explore", ['quizzes' => $quizzes->paginate(2)]);
     }
 
     function create(){

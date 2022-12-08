@@ -8,16 +8,23 @@ use App\Models\QuizHistory;
 use App\Models\QuizProblem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuizSimulationController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth', 'student_only']);
+    }
+
     public function start($quiz_id){
         $quiz = Quiz::find($quiz_id);
         if(Carbon::now()>$quiz->deadline){
             return redirect(route('home'));
         }
         $problems = QuizProblem::where('quiz_id', '=', $quiz_id)->paginate(1);
-        if(!QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', 1)->first()){
+        if(!QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', Auth::id())->first()){
             $new_history = new QuizHistory;
             $new_history->quiz_id = $quiz_id;
             $new_history->user_id = 1;
@@ -33,7 +40,7 @@ class QuizSimulationController extends Controller
             return redirect(route('home'));
         }
         $req->validate(["answer"=>'required']);
-        $history = QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', 1)->first();
+        $history = QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', Auth::id())->first();
         if(!HistoryDetail::where('history_id', '=', $history->id)->where('index', '=', $index)->first()){
             $detail = new HistoryDetail;
             $detail->history_id = $history->id;
@@ -50,7 +57,7 @@ class QuizSimulationController extends Controller
     public function finish($quiz_id)
     {
         $problems = QuizProblem::where('quiz_id', '=', $quiz_id)->get();
-        $history = QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', 1)->first();
+        $history = QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', Auth::id())->first();
         $details = HistoryDetail::where('history_id', '=', $history->id)->get();
         if($problems->count() == $details->count()){
             QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', 1)->update(['status'=>1]);

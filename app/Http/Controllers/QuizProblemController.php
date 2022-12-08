@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Storage;
 
 class QuizProblemController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth', 'teacher_only']);
+    }
+
     function create($quiz_id, $index, $question_type){
         $quiz = Quiz::find($quiz_id);
         $curr_index = count($quiz->problems)>0?$quiz->problems->last()->index+1:1;

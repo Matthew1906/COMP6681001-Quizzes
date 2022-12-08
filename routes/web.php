@@ -39,17 +39,13 @@ Route::get('/profile', function () {
 
 /* Matthew */
 
-Route::get('/quiz', function () {
-    return view('pages.quiz', ['signedIn'=>true, 'type'=>'mcq']); // mcq / ftb
-});
-
 Route::controller(QuizController::class)->group(function(){
     Route::get("/quizzes", "index")->name("index-quiz");
-    Route::get('/quizzes/new', 'create')->name('create-quiz');
-    Route::post('/quizzes/new', 'store')->name('store-quiz');
-    Route::get('/quizzes/{quiz_id}', 'edit')->name('edit-quiz');
-    Route::patch('/quizzes/{quiz_id}', 'update')->name('update-quiz');
-    Route::post('/quizzes/{quiz_id}', 'save')->name('save-quiz');
+    Route::get('/quizzes/new', 'create')->name('create-quiz')->middleware(['auth', 'teacher_only']);
+    Route::post('/quizzes/new', 'store')->name('store-quiz')->middleware(['auth', 'teacher_only']);
+    Route::get('/quizzes/{quiz_id}', 'edit')->name('edit-quiz')->middleware(['auth', 'teacher_only']);
+    Route::patch('/quizzes/{quiz_id}', 'update')->name('update-quiz')->middleware(['auth', 'teacher_only']);
+    Route::post('/quizzes/{quiz_id}', 'save')->name('save-quiz')->middleware(['auth', 'teacher_only']);
 });
 
 Route::controller(QuizProblemController::class)->group(function(){
@@ -77,10 +73,6 @@ Route::fallback(function(){
 /* Charles */
 Route::get('/contact', function () {
     return view('pages.contact',['signedIn'=>false]);
-});
-
-Route::get('/explore', function(){
-    return view('pages.explore',['signedIn'=>true]);
 });
 
 /* Bryan D */
