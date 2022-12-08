@@ -33,9 +33,11 @@ Route::get('/quizHistory', function () {
     return view('pages.quiz-history', ['signedIn'=>true]);
 });
 
-Route::get('/profile', function () {
-    return view('pages.profile', ['signedIn'=>true]);
-})->name("profile");
+Route::get('/profile', [UserController::class, 'profile'])->name("profile");
+
+// Route::get('/profile', function () {
+//     return view('pages.profile', ['signedIn'=>true]);
+// })->name("profile");
 
 /* Matthew */
 
