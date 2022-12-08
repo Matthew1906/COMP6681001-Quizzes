@@ -10,15 +10,14 @@
                             <div class="d-flex flex-column align-items-center bg-pink mb-3 py-3 px-5 border border-2 border-dark rounded">
                                 <h4 class="text-white">Student: {{Auth::user()->full_name}}</h4>
                                 <h4 class="text-white">Class:
-                                @foreach(Auth::user()->classes as $class)
+                                    @foreach(Auth::user()->classes as $class)
                                         {{ $class->name }}
                                         @if( !$loop->last)
-                                        , 
+                                        ,
                                         @endif
                                     @endforeach
                                 </h4>
                                 <h4 class="text-white">
-                                    
                                 </h4>
                             </div>
                         </div>
@@ -28,26 +27,13 @@
                             <h4 class="text-pink fw-bold">Participated Quizzes:</h4>
                         </div>
                         <div class="d-flex flex-column align-items-center bg-orange mb-3 py-3 px-5 border border-2 border-dark rounded">
-                            <li>
-                                <ul class="text-pink">
-                                    <a class="col-xs-6 text-pink fs-5" href="url">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium reprehenderit dicta, libero ut consequuntur nihil qui molestiae incidunt.</a>
-                                </ul>
-                                <ul class="text-pink">
-                                    <a class="col-xs-6 text-pink fs-5" href="url">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium reprehenderit dicta, libero ut consequuntur nihil qui molestiae incidunt.</a>
-                                </ul>
-                                <ul class="text-pink">
-                                    <a class="col-xs-6 text-pink fs-5" href="url">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium reprehenderit dicta, libero ut consequuntur nihil qui molestiae incidunt.</a>
-                                </ul>
-                                <ul class="text-pink">
-                                    <a class="col-xs-6 text-pink fs-5" href="url">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium reprehenderit dicta, libero ut consequuntur nihil qui molestiae incidunt.</a>
-                                </ul>
-                                <ul class="text-pink">
-                                    <a class="col-xs-6 text-pink fs-5" href="url">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium reprehenderit dicta, libero ut consequuntur nihil qui molestiae incidunt.</a>
-                                </ul>
-                                <ul class="text-pink">
-                                    <a class="col-xs-6 text-pink fs-5" href="url">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium reprehenderit dicta, libero ut consequuntur nihil qui molestiae incidunt.</a>
-                                </ul>
-                            </li>
+                            @foreach(Auth::user()->history as $history)
+                                <li>
+                                    <ul class="text-pink">
+                                        <a class="col-xs-6 text-pink fs-5" href="url">{{ $history->quiz->name }}</a>
+                                    </ul>
+                                </li>
+                            @endforeach
                         </div>
                     </div>
                 </div>

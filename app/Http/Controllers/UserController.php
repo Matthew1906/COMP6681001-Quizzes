@@ -64,4 +64,11 @@ class UserController extends Controller
         return redirect(route('home'));
     }
 
+    public function profile()
+    {
+        // dd(Auth::user()->history);
+        $data['title'] = 'Profile';
+        return view('pages.profile', $data);
+    }
+
 }
