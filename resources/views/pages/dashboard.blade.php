@@ -1,13 +1,8 @@
 @extends('layout')
-{{-- @section('css')
 
-@endsection --}}
+@section("title", "Dashboard")
 
 <style>
-    .btn{
-        width: 100%;
-    }
-
     .item1 {
         grid-area: menu;
         padding: 30px 30px 30px 30px;
@@ -57,12 +52,12 @@
         @endauth
         <br>
         <a href ="#">
-        <button type="button" class='btn btn-primary btn-lg btn-block bg-turqouise text-primary text-white hover-bg-pink justify-content-center align-items-center'>SEE PROFILE DETAILS</button>
+        <button type="button" class='w-100 btn btn-primary btn-lg btn-block bg-turqouise text-primary text-white hover-bg-pink justify-content-center align-items-center'>SEE PROFILE DETAILS</button>
         </a>
         <br>
         <br>
         <a href ="#">
-        <button type="button" class='btn btn-primary btn-lg btn-block bg-turqouise text-primary text-white hover-bg-pink justify-content-center align-items-center'>LOGOUT</button>
+        <button type="button" class='w-100 btn btn-primary btn-lg btn-block bg-turqouise text-primary text-white hover-bg-pink justify-content-center align-items-center'>LOGOUT</button>
         </a>
      </div>
     <div class="item2">

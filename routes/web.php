@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\QuizProblemController;
 use App\Http\Controllers\QuizSimulationController;
@@ -21,25 +22,23 @@ Route::get('/', function () {
     return view('pages.dashboard');
 })->name("home")->middleware("auth");
 
-/* Sathya */
-
-Route::get('login', [UserController::class, 'login'])->name('login');
-Route::post('login', [UserController::class, 'login_user'])->name('login_user');
-Route::get('register', [UserController::class, 'register'])->name('register');
-Route::post('register', [UserController::class, 'register_user'])->name('register_user');
-Route::post('logout', [UserController::class, 'logout'])->name("logout");
+Route::controller(UserController::class)->group(function(){
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'login_user')->name('login_user');
+    Route::get('/register', 'register')->name('register');
+    Route::post('/register', 'register_user')->name('register_user');
+    Route::post('/logout', 'logout')->name("logout");
+    Route::get('/profile', 'profile')->name("profile");
+});
 
 Route::get('/quizHistory', function () {
     return view('pages.quiz-history', ['signedIn'=>true]);
 });
 
-Route::get('/profile', [UserController::class, 'profile'])->name("profile");
-
-// Route::get('/profile', function () {
-//     return view('pages.profile', ['signedIn'=>true]);
-// })->name("profile");
-
-/* Matthew */
+Route::controller(ContactController::class)->group(function(){
+    Route::get('/contact', 'create')->name('contact-us');
+    Route::post('/contact', 'store')->name('send-message');
+});
 
 Route::controller(QuizController::class)->group(function(){
     Route::get("/quizzes", "index")->name("index-quiz");
@@ -70,11 +69,6 @@ Route::get("/403", function(){
 
 Route::fallback(function(){
     return redirect(route("home"));
-});
-
-/* Charles */
-Route::get('/contact', function () {
-    return view('pages.contact',['signedIn'=>false]);
 });
 
 /* Bryan D */

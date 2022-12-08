@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Edit Quiz - Quizzes')
+@section('title', 'Edit Quiz')
 
 @section('body')
     <div class='w-100 px-2 text-center'>

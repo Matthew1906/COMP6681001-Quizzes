@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Make Quiz - Quizzes')
+@section('title', 'Make Quiz')
 
 @section('body')
     <div class='container-fluid px-2 text-center'>

@@ -27,11 +27,11 @@ class QuizController extends Controller
             $search = Str::of($req->query('search'))->trim();
             $quizzes = $quizzes->where('name', 'like', "%".$search."%");
         }
-        return view("pages.explore", ['quizzes' => $quizzes->paginate(2)]);
+        return view("pages.quizzes.index", ['quizzes' => $quizzes->paginate(2)]);
     }
 
     function create(){
-        return view('pages.make-quiz', ['signedIn'=>true]);
+        return view('pages.quizzes.create');
     }
 
     function store(Request $req){
@@ -52,7 +52,7 @@ class QuizController extends Controller
 
     function edit($quiz_id){
         $quiz = Quiz::find($quiz_id);
-        return view("pages.edit-quiz", ['signedIn'=>true, 'quiz'=>$quiz]);
+        return view("pages.quizzes.update", ['quiz'=>$quiz]);
     }
 
     function update($quiz_id, Request $req){

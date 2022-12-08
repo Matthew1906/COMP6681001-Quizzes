@@ -21,7 +21,7 @@ class QuizProblemController extends Controller
         $quiz = Quiz::find($quiz_id);
         $curr_index = count($quiz->problems)>0?$quiz->problems->last()->index+1:1;
         if($curr_index>=$index && ($question_type == 'mcq' || $question_type == 'ftb')){
-            return view('pages.make-question', ['signedIn'=>true, 'type'=>$question_type, 'quiz_id'=>$quiz->id, 'index'=>$index]); // mcq / ftb
+            return view('pages.make-question', ['type'=>$question_type, 'quiz_id'=>$quiz->id, 'index'=>$index]); // mcq / ftb
         }
         return redirect(route("edit-quiz", ['quiz_id'=>$quiz_id]));
     }
@@ -83,7 +83,7 @@ class QuizProblemController extends Controller
             $problem = FillProblem::find($quiz_problem->problem_id);
             $question_type = 'ftb';
         }
-        return view('pages.make-question', ['signedIn'=>true, 'type'=>$question_type, 'quiz_id'=>$quiz_id, 'index'=>$index, 'problem'=>$problem]); // mcq / ftb
+        return view('pages.quizzes.store', ['type'=>$question_type, 'quiz_id'=>$quiz_id, 'index'=>$index, 'problem'=>$problem]); // mcq / ftb
     }
 
     function update($quiz_id, $index, Request $req){

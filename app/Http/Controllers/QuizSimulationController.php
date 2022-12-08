@@ -31,7 +31,7 @@ class QuizSimulationController extends Controller
             $new_history->status = 0;
             $new_history->save();
         }
-        return view('pages.quiz', ['signedIn'=>true, 'problems'=>$problems]);
+        return view('pages.quizzes.simulation', ['problems'=>$problems]);
     }
 
     public function answer($quiz_id, $index, Request $req){

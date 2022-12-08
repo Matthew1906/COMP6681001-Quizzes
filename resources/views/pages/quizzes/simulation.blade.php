@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Simulation - Quizzes')
+@section('title', 'Simulation')
 
 @section('body')
     <div class='px-2 text-center'>
@@ -14,7 +14,7 @@
         @php
         $dict = ['1'=>'A', '2'=>'B', '3'=>'C', '4'=>'D'];
         $details = $problems[0]->quiz->histories->filter(function($value, $key){
-            return $value['user_id'] == 1;
+            return $value['user_id'] == Auth::id();
         })[0]->details;
         $answers = [];
         foreach($details as $detail){

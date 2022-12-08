@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Make Quiz (' . Str::upper($type) . ') - Quizzes')
+@section('title', 'Make Quiz (' . Str::upper($type) . ')')
 
 @section('body')
     <div class='px-2 text-center'>

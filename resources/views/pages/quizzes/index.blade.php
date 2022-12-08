@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Explore Quizzes')
+@section('title', 'Explore')
 
 @section('body')
     <div class="container-fluid py-1 px-5">
@@ -22,15 +22,31 @@
                         <h6 class="card-text">Average Score: 12000/10</h6>
                         <p class="card-text"> {{ $quiz->histories_count }}/{{ $quiz->class->students->count() }} students
                             have done this quiz</p>
-                        <a href="#" class="btn btn-primary">
-                            Attempt
-                        </a>
+                        @auth
+                            {{-- If the user hasn't done the quiz or user has done the quiz but the quiz is redoable --}}
+                            @php
+                                $history = Auth::user()->history->filter(function ($value, $key) {
+                                    return $value['quiz_id'] == $quiz->id;
+                                });
+                                $done = $history->count() > 0;
+                                $redoable = $quiz->repeat;
+                            @endphp
+                            @if (!$done || ($done && $redoable))
+                                <a href="{{ route('start-quiz', ['quiz_id' => $quiz->id]) }}" class="btn bg-turqouise text-white hover-bg-pink">
+                                    Attempt
+                                </a>
+                            @else
+                                <a class="btn bg-pink text-white">
+                                    You already did this quiz!
+                                </a>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             @endforeach
         </div>
         @if ($quizzes->lastPage() > 1)
-            <ul class="mt-2 pagination d-flex justify-content-center border border-2 border-turqouise">
+            <ul class="mt-2 pagination d-flex justify-content-center">
                 <li class="page-item"><a class="page-link text-turqouise fs-4"
                         href="{{ $quizzes->appends(request()->input())->url(1) }}">1</a></li>
                 @if ($quizzes->lastPage() >= 2)
@@ -56,4 +72,5 @@
                 @endif
             </ul>
         @endif
-    @endsection
+    </div>
+@endsection
