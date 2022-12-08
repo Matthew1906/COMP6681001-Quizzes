@@ -47,7 +47,7 @@ class FillSeeder extends Seeder
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
             ],
-            //
+            //5
             [
                 'question'=>"2 x 6 = ?",
                 'answer'=>"12",
@@ -84,7 +84,7 @@ class FillSeeder extends Seeder
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
             ],
-            //
+            // 11
             [
                 'question'=>"Who is the first king of Majapahit Kingdom",
                 'answer'=>"Raden Wijaya",

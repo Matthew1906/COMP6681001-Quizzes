@@ -13,16 +13,18 @@
         @endif
         @php
         $dict = ['1'=>'A', '2'=>'B', '3'=>'C', '4'=>'D'];
-        $details = $problems[0]->quiz->histories->filter(function($value, $key){
-            return $value['user_id'] == Auth::id();
-        })[0]->details;
-        $answers = [];
-        foreach($details as $detail){
-            if($detail['index'] == Request::query('page', 1)){
-                $answers[] = $detail;
-            }
-        };
-        $curr = collect($answers)->first();
+        $details = $problems[0]->quiz->histories->filter(function($history){
+            return $history['user_id'] == Auth::id();
+        });
+        if($details->count()>0){
+            $answers = $details->first()->details->filter(function($detail){
+                return $detail['index'] == Request::query('page', 1);
+            });
+            $curr = $answers->first();
+        }
+        else{
+            $curr = null;
+        }
         @endphp
         <div class='d-flex justify-content-center align-items-center'>
             @if ($problems->currentPage() > 1)
@@ -107,7 +109,7 @@
                 </a>
             @endif
         </div>
-        <ul class="mt-2 pagination d-flex justify-content-center border border-2 border-turqouise">
+        <ul class="mt-2 pagination d-flex justify-content-center">
             <li class="page-item"><a class="page-link text-turqouise fs-4" href="{{ $problems->url(1) }}">1</a></li>
             @if ($problems->lastPage() >= 2)
                 <li class="page-item"><a class="page-link text-turqouise fs-4" href="{{ $problems->url(2) }}">2</a></li>

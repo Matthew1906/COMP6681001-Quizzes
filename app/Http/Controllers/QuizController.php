@@ -17,11 +17,10 @@ class QuizController extends Controller
         if(Auth::check()){
             $classes = ClassGroup::whereRelation('students', 'id', '=', Auth::id())->pluck('id');
             $quizzes = Quiz::where('status', '=', 1)->where('deadline', '>', Carbon::now())
-                ->whereIn('class_id', $classes)->withCount('histories');
+                ->whereIn('class_id', $classes);
         }
         else{
-            $quizzes = Quiz::where('status', '=', 1)->where('deadline', '>', Carbon::now())
-                ->withCount('histories');
+            $quizzes = Quiz::where('status', '=', 1)->where('deadline', '>', Carbon::now());
         }
         if($req->has('search') && Str::of($req->query('search'))->trim()!=''){
             $search = Str::of($req->query('search'))->trim();

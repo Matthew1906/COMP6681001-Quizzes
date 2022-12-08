@@ -89,11 +89,11 @@ class QuizProblemSeeder extends Seeder
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
             ],
-            //
+            // Quiz 2
             [
                 'index'=> 1,
                 'quiz_id'=>2,
-                'problem_id'=>1,
+                'problem_id'=>6,
                 'problem_type'=>'App\Models\FillProblem',
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -101,7 +101,7 @@ class QuizProblemSeeder extends Seeder
             [
                 'index'=> 2,
                 'quiz_id'=>2,
-                'problem_id'=>2,
+                'problem_id'=>7,
                 'problem_type'=>'App\Models\FillProblem',
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -117,7 +117,7 @@ class QuizProblemSeeder extends Seeder
             [
                 'index'=> 4,
                 'quiz_id'=>2,
-                'problem_id'=>3,
+                'problem_id'=>8,
                 'problem_type'=>'App\Models\FillProblem',
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -125,7 +125,7 @@ class QuizProblemSeeder extends Seeder
             [
                 'index'=> 5,
                 'quiz_id'=>2,
-                'problem_id'=>4,
+                'problem_id'=>9,
                 'problem_type'=>'App\Models\FillProblem',
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -141,7 +141,7 @@ class QuizProblemSeeder extends Seeder
             [
                 'index'=> 7,
                 'quiz_id'=>2,
-                'problem_id'=>5,
+                'problem_id'=>10,
                 'problem_type'=>'App\Models\FillProblem',
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -149,7 +149,7 @@ class QuizProblemSeeder extends Seeder
             [
                 'index'=> 8,
                 'quiz_id'=>2,
-                'problem_id'=>6,
+                'problem_id'=>11,
                 'problem_type'=>'App\Models\FillProblem',
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -170,11 +170,11 @@ class QuizProblemSeeder extends Seeder
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
             ],
-            //
+            // Majapahit
             [
                 'index'=> 1,
                 'quiz_id'=>3,
-                'problem_id'=>1,
+                'problem_id'=>12,
                 'problem_type'=>'App\Models\FillProblem',
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -198,7 +198,7 @@ class QuizProblemSeeder extends Seeder
             [
                 'index'=> 4,
                 'quiz_id'=>3,
-                'problem_id'=>2,
+                'problem_id'=>13,
                 'problem_type'=>'App\Models\FillProblem',
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()

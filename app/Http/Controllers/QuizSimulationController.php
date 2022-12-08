@@ -27,7 +27,7 @@ class QuizSimulationController extends Controller
         if(!QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', Auth::id())->first()){
             $new_history = new QuizHistory;
             $new_history->quiz_id = $quiz_id;
-            $new_history->user_id = 1;
+            $new_history->user_id = Auth::id();
             $new_history->status = 0;
             $new_history->save();
         }
@@ -60,8 +60,8 @@ class QuizSimulationController extends Controller
         $history = QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', Auth::id())->first();
         $details = HistoryDetail::where('history_id', '=', $history->id)->get();
         if($problems->count() == $details->count()){
-            QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', 1)->update(['status'=>1]);
-            return redirect(route('home'));
+            QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', Auth::id())->update(['status'=>1]);
+            return view('pages.quizzes.result', ['history'=>$history]);
         }
         return back()->with('error', 'You need to answer all questions first!!');
     }
