@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             MCSeeder::class,
             FillSeeder::class,
             QuizProblemSeeder::class,
-            QuizHistorySeeder::class,
             QuizClassesSeeder::class,
         ]);
     }
