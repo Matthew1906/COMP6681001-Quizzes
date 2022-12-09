@@ -24,7 +24,6 @@
                     </div>
                 </div>
 
-
                 <div class="col bg-danger mx-4">
                     <div class="border-bottom border-5 text-center mx-3 my-2">
                         <h4>Past Quizzes:</h4>
@@ -33,7 +32,7 @@
                         <h4 class="mx-3 my-2">Subjects:</h4>
                         <ul>
                             @foreach ($class->quizzes as $quiz)
-                            <li class="py-1">{{ $quiz->name }}</li>
+                            <li class="py-1" >{{ $quiz->name }}</li>
                             @endforeach
                         </ul>
                     </div>
