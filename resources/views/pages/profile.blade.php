@@ -8,7 +8,11 @@
                         <div class="row w-50 text-center align-items-center">
                             <h2 class="text-success fw-bold">Profile</h2>
                             <div class="d-flex flex-column align-items-center bg-pink mb-3 py-3 px-5 border border-2 border-dark rounded">
-                                <h4 class="text-white">Student: {{Auth::user()->full_name}}</h4>
+                                @if (Auth::user()->role_id === 1)
+                                    <h4 class="text-white">Teacher: {{Auth::user()->full_name}}</h4>
+                                @else
+                                    <h4 class="text-white">Student: {{Auth::user()->full_name}}</h4>
+                                @endif
                                 <h4 class="text-white">Class:
                                     @foreach(Auth::user()->classes as $class)
                                         {{ $class->name }}
