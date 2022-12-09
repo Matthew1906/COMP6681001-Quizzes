@@ -51,7 +51,7 @@
         <h3 class= "text-primary text-black text-center font-weight-bold">Hello {{ Auth::user()->full_name }}</h3>
         @endauth
         <br>
-        <a href ="#">
+        <a href ="/profile/">
         <button type="button" class='w-100 btn btn-primary btn-lg btn-block bg-turqouise text-primary text-white hover-bg-pink justify-content-center align-items-center'>SEE PROFILE DETAILS</button>
         </a>
         <br>

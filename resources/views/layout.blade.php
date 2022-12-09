@@ -27,7 +27,7 @@
                 <ul class="navbar-nav fs-5">
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link text-white active" aria-current="page" href="#">
+                            <a class="nav-link text-white active" aria-current="page" href="/my-classes/">
                                 <ion-icon name="people" size='medium'></ion-icon> MY CLASS
                             </a>
                         </li>

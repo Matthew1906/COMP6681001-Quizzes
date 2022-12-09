@@ -5,6 +5,7 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\QuizProblemController;
 use App\Http\Controllers\QuizSimulationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClassController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,7 @@ Route::controller(UserController::class)->group(function(){
     Route::get('/register', 'register')->name('register');
     Route::post('/register', 'register_user')->name('register_user');
     Route::post('/logout', 'logout')->name("logout");
+    Route::post('/', 'logout')->name("logout");
     Route::get('/profile', 'profile')->name("profile");
 });
 
@@ -72,9 +74,7 @@ Route::fallback(function(){
 });
 
 /* Bryan D */
-Route::get('/my-class', function () {
-    return view('pages.my-class',['signedIn'=>true]);
-});
+Route::get('/my-class/{class_id}', [ClassController::class, "classDetail"]);
 
 Route::get('/my-classes', function(){
     return view('pages.my-classes',['signedIn'=>true]);
