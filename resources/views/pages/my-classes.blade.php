@@ -1,58 +1,43 @@
 @extends('layout')
 
 @section('body')
-    <div class='px-2 text-center w-75'>
-            <div class="d-flex flex-column align-items-center bg-white mb-3 py-3 px-5 border border-2 border-dark rounded">
-                <div>
-                    <div class="row text-center align-items-center m-3 align-top">
-                        <div class="">
-                            <h1 class="text-success fw-bold">My Classes</h1>
-                        </div>
-                    </div>
-                    @foreach (Auth::user()->classes as $class)
-                    <div class="d-flex justify-content-evenly flex-wrap gap-3 py-3">
-                        <div class="card text-center d-flex align-content-center flex-wrap">
-                            <div class="card text-center w-100 d-flex align-content-center bg-warning flex-wrap px-2 pt-2">
-                                <h5><a href="/my-class/{{ $class->id }}" class="text-black card-title text-center"> {{$class->name}}</a></h5>
-                            </div>
-                            <p class="card-text pt-2" style="width: 300px;">{{$class->description}}</p>
-                            <p class="card-text text-center pb-2">Students: {{$class->students->count()}}</p>
-                        </div>
-                    </div>
-                    @endforeach
 
-                    <div>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination pagination-lg justify-content-center m-3">
-                              <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                  <span aria-hidden="true">&laquo;</span>
-                                </a>
-                              </li>
-                              <li class="page-item"><a class="page-link" href="#">1</a></li>
-                              <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                              <li class="page-item"><a class="page-link" href="#">3</a></li>
-                              <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                  <span aria-hidden="true">&raquo;</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </nav>
+    <div class="container d-flex flex-column align-items-center bg-white py-3 border border-2 border-dark rounded w-75 h-100">
+        <div class="text-center">
+            <h1 class="text-success fw-bold">Class {{ $class->name }}</h1>
+        </div>
+
+            <div class="container d-flex col align-self-end text-white py-3">
+                <div class="col bg-warning mx-4">
+                    <div class="border-bottom border-5 text-center mx-3 my-2">
+                        @foreach ($class->teachers as $teacher)
+                            <h4>Teacher: {{ $teacher->full_name }}</h4>
+                        @endforeach
                     </div>
+                    <div class="mx-3 my-2">
+                        <h4 class="">Students:</h4>
+                        <ul>
+                            @foreach ($class->students as $student)
+                                <li class="py-1">{{ $student->full_name }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
 
 
-                    {{-- @foreach ($matkuls as $matkul)
-                    <div class="cards">
-                        <div class="title"> {{$matkul->namaKelas}} </div>
-                        <div class="description"> {{$matkul->deskripsi}} </div>
-
+                <div class="col bg-danger mx-4">
+                    <div class="border-bottom border-5 text-center mx-3 my-2">
+                        <h4>Past Quizzes:</h4>
+                    </div>
+                    <div class="text-start">
+                        <h4 class="mx-3 my-2">Subjects:</h4>
+                        <ul>
+                            @foreach ($class->quizzes as $quiz)
+                            <li class="py-1">{{ $quiz->name }}</li>
+                            @endforeach
+                        </ul>
                     </div>
 
-                    @endforeach --}}
-                    <div class="d-flex">
-                        <div></div>
-                    </div>
                 </div>
             </div>
     </div>
