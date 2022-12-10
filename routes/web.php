@@ -19,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.dashboard');
-})->name("home")->middleware("auth");
+Route::get('/', [QuizController::class, 'dashboard'])->name("home")->middleware("auth");
 
 Route::controller(UserController::class)->group(function(){
     Route::get('/login', 'login')->name('login');
@@ -29,7 +27,6 @@ Route::controller(UserController::class)->group(function(){
     Route::get('/register', 'register')->name('register');
     Route::post('/register', 'register_user')->name('register_user');
     Route::post('/logout', 'logout')->name("logout");
-    Route::post('/', 'logout')->name("logout");
     Route::get('/profile', 'profile')->name("profile");
 });
 

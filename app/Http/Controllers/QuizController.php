@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ClassGroup;
 use App\Models\Quiz;
+use App\Models\QuizHistory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -12,6 +13,21 @@ use Illuminate\Support\Facades\Auth;
 
 class QuizController extends Controller
 {
+
+    function dashboard()
+    {
+        $average_score = QuizHistory::where('user_id', '=', Auth::id())->get()
+            ->map(function($history){
+                return $history->score();
+            }
+        )->average();
+        $classes = ClassGroup::whereRelation('students', 'id', '=', Auth::id())->pluck('id');
+        $histories = QuizHistory::where('user_id', '=', Auth::id())->where('status', '!=', 1)->pluck('quiz_id');
+        $closest_deadline = Quiz::where('status', '=', 1)->where('deadline', '>', Carbon::now())
+            ->whereIn('class_id', $classes)->whereNotIn('id', $histories)->orderBy('deadline')->first();
+        return view('pages.home', ['average_score'=>$average_score, 'closest_deadline'=>$closest_deadline]);
+    }
+
     function index(Request $req)
     {
         if(Auth::check()){

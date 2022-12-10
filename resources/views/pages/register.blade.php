@@ -1,7 +1,6 @@
 @extends('layout')
-{{-- @section('css')
 
-@endsection --}}
+@section("title", 'Register')
 
 @section('body')
 <div class="container bg-white border border-2 border-dark rounded w-50 row">
