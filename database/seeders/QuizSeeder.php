@@ -23,6 +23,7 @@ class QuizSeeder extends Seeder
                 'description'=>'Welcome to Mathematics!! Try out this test to measure your logic and counting skills!!',
                 'status'=>1,
                 'repeat'=>0,
+                'start_date'=> new Carbon('first day of December 2022'),
                 'deadline'=> new Carbon('first day of January 2024'),
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -33,6 +34,7 @@ class QuizSeeder extends Seeder
                 'description'=>"Let's test out your multiplication and division skills!!",
                 'status'=>1,
                 'repeat'=>0,
+                'start_date'=> new Carbon('first day of March 2023'),
                 'deadline'=> new Carbon('first day of March 2024'),
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -43,6 +45,7 @@ class QuizSeeder extends Seeder
                 'description'=>'Test out your memory and understanding of the history of Majapahit Kingdom',
                 'status'=>1,
                 'repeat'=>0,
+                'start_date'=> new Carbon('first day of December 2022'),
                 'deadline'=> new Carbon('first day of January 2024'),
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()

@@ -23,20 +23,22 @@ class QuizController extends Controller
         )->average();
         $classes = ClassGroup::whereRelation('students', 'id', '=', Auth::id())->pluck('id');
         $histories = QuizHistory::where('user_id', '=', Auth::id())->where('status', '!=', 1)->pluck('quiz_id');
-        $closest_deadline = Quiz::where('status', '=', 1)->where('deadline', '>', Carbon::now())
+        $closest_start = Quiz::where('status', '=', 1)->where('start_date', '>', Carbon::now())->orderBy('start_date')->first();
+        $closest_deadline = Quiz::where('status', '=', 1)->where('start_date', '<=', Carbon::now())->where('deadline', '>', Carbon::now())
             ->whereIn('class_id', $classes)->whereNotIn('id', $histories)->orderBy('deadline')->first();
-        return view('pages.home', ['average_score'=>$average_score, 'closest_deadline'=>$closest_deadline]);
+        return view('pages.home', ['average_score'=>$average_score?$average_score:0, 'closest_start'=>$closest_start, 'closest_deadline'=>$closest_deadline]);
     }
 
     function index(Request $req)
     {
         if(Auth::check()){
             $classes = ClassGroup::whereRelation('students', 'id', '=', Auth::id())->pluck('id');
-            $quizzes = Quiz::where('status', '=', 1)->where('deadline', '>', Carbon::now())
-                ->whereIn('class_id', $classes);
+            $quizzes = Quiz::where('status', '=', 1)->where('start_date', '<=', Carbon::now())
+                ->where('deadline', '>', Carbon::now())->whereIn('class_id', $classes);
         }
         else{
-            $quizzes = Quiz::where('status', '=', 1)->where('deadline', '>', Carbon::now());
+            $quizzes = Quiz::where('status', '=', 1)->where('start_date', '<=', Carbon::now())
+                ->where('deadline', '>', Carbon::now());
         }
         if($req->has('search') && Str::of($req->query('search'))->trim()!=''){
             $search = Str::of($req->query('search'))->trim();
@@ -53,11 +55,13 @@ class QuizController extends Controller
         $req->validate([
             "name"=>"required|unique:quizzes|min:5|max:50",
             "description"=>'min:5|max:500',
+            "start_date"=>'required|date|after_or_equal:'.Carbon::now()->format("m/d/Y H:i"),
             "deadline"=>'required|date|after_or_equal:'.Carbon::now()->format("m/d/Y H:i"),
         ]);
         $new_quiz = new Quiz;
         $new_quiz->name = $req->name;
         $new_quiz->description = $req->description;
+        $new_quiz->start_date = $req->start_date;
         $new_quiz->deadline = $req->deadline;
         $new_quiz->repeat = Arr::exists($req, 'repeat')?1:0;
         $new_quiz->status = 0;
@@ -74,6 +78,7 @@ class QuizController extends Controller
         $req->validate([
             "name"=>"required|min:5|max:50",
             "description"=>'min:5|max:500',
+            "start_date"=>'required|date|after_or_equal:'.Carbon::now()->format("m/d/Y H:i"),
             "deadline"=>'required|date|after_or_equal:'.Carbon::now()->format("m/d/Y H:i"),
         ]);
         $quiz = Quiz::find($quiz_id);
