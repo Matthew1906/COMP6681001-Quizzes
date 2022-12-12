@@ -75,10 +75,8 @@ Route::fallback(function(){
 
 /* Bryan D */
 Route::get('/my-class/{class_id}', [ClassController::class, "classDetail"]);
+Route::get('/my-classes', [ClassController::class, "classList"]);
 
-Route::get('/my-classes', function(){
-    return view('pages.my-classes',['signedIn'=>true]);
-});
 Route::get('/my-class/quiz-history', function(){
     return view('pages.my-class-quiz-history',['signedIn'=>true]);
 });

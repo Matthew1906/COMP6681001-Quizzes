@@ -9,7 +9,7 @@
                             <h1 class="text-success fw-bold">My Classes</h1>
                         </div>
                     </div>
-                    @foreach (Auth::user()->classes as $class)
+                    @foreach ($classList as $class)
                     <div class="d-flex justify-content-evenly flex-wrap gap-3 py-3">
                         <div class="card text-center d-flex align-content-center flex-wrap">
                             <div class="card text-center w-100 d-flex align-content-center bg-warning flex-wrap px-2 pt-2">
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     @endforeach
-
+                    {{ $classList->links() }}
                     <div>
                         <nav aria-label="Page navigation example">
                             <ul class="pagination pagination-lg justify-content-center m-3">
