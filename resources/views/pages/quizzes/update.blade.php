@@ -34,6 +34,16 @@
                         </div>
                         <div class="row g-3 align-items-center mt-1 pb-3 px-2">
                             <div class="col-3 text-start">
+                                <label for='start_date' name='start_date' class="col-form-label text-pink fw-bold fs-4">Quiz
+                                    Start Date: </label>
+                            </div>
+                            <div class="col-9">
+                                <input type="datetime-local" id="start_date" name='start_date' value="{{ $quiz->start_date }}"
+                                    class="form-control border border-1 border-dark rounded-2" aria-describedby="start_date">
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mt-1 pb-3 px-2">
+                            <div class="col-3 text-start">
                                 <label for='deadline' name='deadline' class="col-form-label text-pink fw-bold fs-4">Quiz
                                     Deadline: </label>
                             </div>
@@ -52,12 +62,14 @@
                         </div>
                     </div>
                 </div>
+                @if($quiz->start_date > \Carbon\Carbon::now())
                 <div class="row g-3 mt-1 px-1 justify-content-end">
                     <button
                         class='col-2 btn bg-turqouise text-white hover-bg-pink justify-content-center align-items-center fs-5'>
                         Update
                     </button>
                 </div>
+                @endif
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -116,6 +128,7 @@
                             ])
                         </div>
                     </div>
+                    @if($quiz->start_date > \Carbon\Carbon::now())
                     <div class='mt-4 d-flex flex-column'>
                         <a href="{{route('edit-quiz-problem', ['quiz_id'=>$quiz->id, 'index'=>$problem->index])}}">
                             <ion-icon name="pencil" class='text-black fs-2'></ion-icon>
@@ -130,6 +143,7 @@
                             </button>
                         </form>
                     </div>
+                    @endif
                 </div>
             @else
                 <div class="d-flex align-items-center bg-white mb-3 py-3 px-5 border border-2 border-dark roundedt">
@@ -155,6 +169,7 @@
                             ])
                         </div>
                     </div>
+                    @if($quiz->start_date > \Carbon\Carbon::now())
                     <div class='mt-4 d-flex flex-column'>
                         <a href="{{route('edit-quiz-problem', ['quiz_id'=>$quiz->id, 'index'=>$problem->index])}}">
                             <ion-icon name="pencil" class='text-black fs-2'></ion-icon>
@@ -169,9 +184,11 @@
                             </button>
                         </form>
                     </div>
+                    @endif
                 </div>
             @endif
         @endforeach
+        @if($quiz->start_date > \Carbon\Carbon::now())
         <div class="row g-3 mt-1 px-1 justify-content-between">
             <div class="col-auto">
                 <a href="{{ route('create-quiz-problem', ['quiz_id' => $quiz->id, 'index' => count($quiz->problems)>=1?$quiz->problems->last()->index + 1:1, 'question_type' => 'mcq']) }}"
@@ -191,5 +208,6 @@
                 </button>
             </form>
         </div>
+        @endif
     </div>
 @endsection

@@ -32,6 +32,16 @@
                     </div>
                     <div class="row g-3 align-items-center mt-1 pb-3 px-2">
                         <div class="col-3 text-start">
+                            <label for='start_date' name='start_date' class="col-form-label text-pink fw-bold fs-4">Quiz
+                                Start Date: </label>
+                        </div>
+                        <div class="col-9">
+                            <input type="datetime-local" id="start_date" name='start_date'
+                                class="form-control border border-1 border-dark rounded-2" aria-describedby="start_date">
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center mt-1 pb-3 px-2">
+                        <div class="col-3 text-start">
                             <label for='deadline' name='deadline' class="col-form-label text-pink fw-bold fs-4">Quiz
                                 Deadline: </label>
                         </div>
