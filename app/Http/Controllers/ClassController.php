@@ -21,7 +21,7 @@ class ClassController extends Controller
 
     public function classList(){
 
-        $data['title'] = 'Class List';
+        $data['title'] = 'ClassList';
         $classList = ClassGroup::whereRelation('teachers', 'id', '=', Auth::id())->get();
         // dd($classList);
         return view('pages.my-classes', ['classList' => $classList]);
