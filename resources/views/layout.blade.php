@@ -33,7 +33,7 @@
                         </li>
                     @endauth
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{route('index-quiz')}}">
+                        <a class="nav-link text-white" href="{{route('quizzes.index')}}">
                             <ion-icon name="rocket"></ion-icon> EXPLORE
                         </a>
                     </li>
@@ -71,9 +71,9 @@
                         <a href="{{ route('login') }}" class='btn bg-white text-turqouise hover-pink fw-bold me-2 '>
                             Login
                         </a>
-                        <a href="{{ route('register') }}" class='btn bg-white text-turqouise hover-pink fw-bold'>
+                        {{-- <a href="{{ route('register') }}" class='btn bg-white text-turqouise hover-pink fw-bold'>
                             Register
-                        </a>
+                        </a> --}}
                     </div>
                 @endauth
             </div>

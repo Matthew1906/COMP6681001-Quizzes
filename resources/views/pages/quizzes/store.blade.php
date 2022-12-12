@@ -4,7 +4,7 @@
 
 @section('body')
     <div class='px-2 text-center'>
-        <form action="@isset($problem){{ route('update-quiz-problem', ['quiz_id' => $quiz_id, 'index' => $index]) }}@else{{ route('store-quiz-problem', ['quiz_id' => $quiz_id, 'index' => $index, 'question_type' => $type]) }}@endif" method="POST" class='bg-white py-3 px-5' enctype="multipart/form-data">
+        <form action="@isset($problem){{ route('quiz-problems.update', ['quiz_id' => $quiz_id, 'index' => $index]) }}@else{{ route('quiz-problems.store', ['quiz_id' => $quiz_id, 'index' => $index, 'question_type' => $type]) }}@endif" method="POST" class='bg-white py-3 px-5' enctype="multipart/form-data">
             @csrf
             @isset($problem)
             @method('PATCH')

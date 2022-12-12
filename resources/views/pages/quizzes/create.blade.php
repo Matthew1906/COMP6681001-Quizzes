@@ -4,7 +4,7 @@
 
 @section('body')
     <div class='container-fluid px-2 text-center'>
-        <form action={{ route('store-quiz') }} method="POST">
+        <form action={{ route('quizzes.store') }} method="POST">
             @method('POST')
             @csrf
             <div class="d-flex align-items-start bg-white mb-3 py-3 px-5 border border-2 border-dark rounded">

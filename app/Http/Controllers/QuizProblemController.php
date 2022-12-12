@@ -23,7 +23,7 @@ class QuizProblemController extends Controller
         if($curr_index>=$index && ($question_type == 'mcq' || $question_type == 'ftb')){
             return view('pages.make-question', ['type'=>$question_type, 'quiz_id'=>$quiz->id, 'index'=>$index]); // mcq / ftb
         }
-        return redirect(route("edit-quiz", ['quiz_id'=>$quiz_id]));
+        return redirect(route("quizzes.edit", ['quiz_id'=>$quiz_id]));
     }
 
     function store($quiz_id, $index, $question_type, Request $req){
@@ -70,7 +70,7 @@ class QuizProblemController extends Controller
             $new_quiz_problem->image = $req->file('image')->getClientOriginalName();
         }
         $new_quiz_problem->save();
-        return redirect(route('edit-quiz', ['quiz_id'=>$quiz_id]));
+        return redirect(route('quizzes.edit', ['quiz_id'=>$quiz_id]));
     }
 
     function edit($quiz_id, $index){
@@ -124,7 +124,7 @@ class QuizProblemController extends Controller
             $quiz_problem->image = $req->file('image')->getClientOriginalName();
         }
         $quiz_problem->save();
-        return redirect(route('edit-quiz', ['quiz_id'=>$quiz_id]));
+        return redirect(route('quizzes.edit', ['quiz_id'=>$quiz_id]));
     }
 
     function destroy($quiz_id, $index){
@@ -137,7 +137,7 @@ class QuizProblemController extends Controller
         }
         QuizProblem::where('index', "=", $index)->where('quiz_id', '=', $quiz_id)->delete();
         $problem->delete();
-        return redirect(route('edit-quiz', ['quiz_id'=>$quiz_id]));
+        return redirect(route('quizzes.edit', ['quiz_id'=>$quiz_id]));
     }
 
 }

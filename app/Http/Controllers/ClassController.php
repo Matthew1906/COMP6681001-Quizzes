@@ -22,8 +22,13 @@ class ClassController extends Controller
     public function classList(){
 
         $data['title'] = 'ClassList';
-        $classList = ClassGroup::whereRelation('teachers', 'id', '=', Auth::id())->get();
-        // dd($classList);
+        if(Auth::user()->role->name=='student'){
+            $role = 'students';
+        }
+        else{
+            $role = 'teachers';
+        }
+        $classList = ClassGroup::whereRelation($role, 'id', '=', Auth::id())->paginate(1);
         return view('pages.my-classes', ['classList' => $classList]);
         // return view('pages.my-classes', compact('classList'));
     }

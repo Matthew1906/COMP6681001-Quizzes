@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col">
                             <form
-                                action="{{ route('answer-quiz', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }}"
+                                action="{{ route('quiz-simulations.answer', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }}"
                                 method="post">
                                 @csrf
                                 @includeIf('components.mcq-answer-card', [
@@ -50,7 +50,7 @@
                         </div>
                         <div class="col">
                             <form
-                                action="{{ route('answer-quiz', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }}"
+                                action="{{ route('quiz-simulations.answer', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }}"
                                 method="post">
                                 @csrf
                                 @includeIf('components.mcq-answer-card', [
@@ -65,7 +65,7 @@
                     <div class="row">
                         <div class="col">
                             <form
-                                action="{{ route('answer-quiz', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }}"
+                                action="{{ route('quiz-simulations.answer', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }}"
                                 method="post">
                                 @csrf
                                 @includeIf('components.mcq-answer-card', [
@@ -78,7 +78,7 @@
                         </div>
                         <div class="col">
                             <form
-                                action="{{ route('answer-quiz', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }}"
+                                action="{{ route('quiz-simulations.answer', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }}"
                                 method="post">
                                 @csrf
                                 @includeIf('components.mcq-answer-card', [
@@ -96,7 +96,7 @@
                 </div>
             @else
                 @includeIf('components.ftb-answer-card', [
-                    'path' => route('answer-quiz', [
+                    'path' => route('quiz-simulations.answer', [
                         'quiz_id' => $problems[0]->quiz_id,
                         'index' => $problems[0]->index,
                     ]),
@@ -131,8 +131,8 @@
             @endif
         </ul>
         @if($problems->currentPage() == $problems->lastPage())
-        {{-- {{ route('answer-quiz', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }} --}}
-        <form action="{{route('finish-quiz', ['quiz_id'=>$problems[0]->quiz_id])}}" method='POST'>
+        {{-- {{ route('quiz-simulations.answer', ['quiz_id' => $problems[0]->quiz_id, 'index' => $problems[0]->index]) }} --}}
+        <form action="{{route('quiz-simulations.finish', ['quiz_id'=>$problems[0]->quiz_id])}}" method='POST'>
             @csrf
             @method('PATCH')
             <button class='btn bg-turqouise text-white hover-bg-pink justify-content-center align-items-center fs-5'>

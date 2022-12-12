@@ -5,7 +5,7 @@
 @section('body')
     <div class="container-fluid py-1 px-5">
         <h1 class='text-primary text-black text-center font-weight-bold mb-4'>Explore available quizzes</h1>
-        <form class="input-group" action={{ route('index-quiz') }}>
+        <form class="input-group" action={{ route('quizzes.index') }}>
             <input type="text" class="form-control rounded" placeholder="Search Quiz" name='search' />
             <button type="submit" class="btn bg-turqouise text-primary text-white hover-bg-pink align-items-center">Search
                 Quiz
@@ -44,7 +44,7 @@
                             have tried this quiz</p>
                         @auth
                             @if (!$done || ($done && $redoable))
-                                <a href="{{ route('start-quiz', ['quiz_id' => $quiz->id]) }}" class="btn bg-turqouise text-white hover-bg-pink">
+                                <a href="{{ route('quiz-simulations.start', ['quiz_id' => $quiz->id]) }}" class="btn bg-turqouise text-white hover-bg-pink">
                                     Attempt
                                 </a>
                             @else

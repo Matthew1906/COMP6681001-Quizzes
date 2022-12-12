@@ -40,26 +40,26 @@ Route::controller(ContactController::class)->group(function(){
 });
 
 Route::controller(QuizController::class)->group(function(){
-    Route::get("/quizzes", "index")->name("index-quiz");
-    Route::get('/quizzes/new', 'create')->name('create-quiz')->middleware(['auth', 'teacher_only']);
-    Route::post('/quizzes/new', 'store')->name('store-quiz')->middleware(['auth', 'teacher_only']);
-    Route::get('/quizzes/{quiz_id}', 'edit')->name('edit-quiz')->middleware(['auth', 'teacher_only']);
-    Route::patch('/quizzes/{quiz_id}', 'update')->name('update-quiz')->middleware(['auth', 'teacher_only']);
-    Route::post('/quizzes/{quiz_id}', 'save')->name('save-quiz')->middleware(['auth', 'teacher_only']);
+    Route::get("/quizzes", "index")->name("quizzes.index");
+    Route::get('/quizzes/new', 'create')->name('quizzes.create')->middleware(['auth', 'teacher_only']);
+    Route::post('/quizzes/new', 'store')->name('quizzes.store')->middleware(['auth', 'teacher_only']);
+    Route::get('/quizzes/{quiz_id}', 'edit')->name('quizzes.edit')->middleware(['auth', 'teacher_only']);
+    Route::patch('/quizzes/{quiz_id}', 'update')->name('quizzes.update')->middleware(['auth', 'teacher_only']);
+    Route::post('/quizzes/{quiz_id}', 'save')->name('quizzes.save')->middleware(['auth', 'teacher_only']);
 });
 
 Route::controller(QuizProblemController::class)->group(function(){
-    Route::get('/quizzes/{quiz_id}/problems/{index}/{question_type}', 'create')->name('create-quiz-problem');
-    Route::post('/quizzes/{quiz_id}/problems/{index}/{question_type}', 'store')->name('store-quiz-problem');
-    Route::get('/quizzes/{quiz_id}/problems/{index}', 'edit')->name('edit-quiz-problem');
-    Route::patch('/quizzes/{quiz_id}/problems/{index}', 'update')->name('update-quiz-problem');
-    Route::delete('/quizzes/{quiz_id}/problems/{index}', 'destroy')->name('destroy-quiz-problem');
+    Route::get('/quizzes/{quiz_id}/problems/{index}/{question_type}', 'create')->name('quiz-problems.create');
+    Route::post('/quizzes/{quiz_id}/problems/{index}/{question_type}', 'store')->name('quiz-problems.store');
+    Route::get('/quizzes/{quiz_id}/problems/{index}', 'edit')->name('quiz-problems.edit');
+    Route::patch('/quizzes/{quiz_id}/problems/{index}', 'update')->name('quiz-problems.update');
+    Route::delete('/quizzes/{quiz_id}/problems/{index}', 'destroy')->name('quiz-problems.destroy');
 });
 
 Route::controller(QuizSimulationController::class)->group(function(){
-    Route::get('/quizzes/{quiz_id}/simulation', 'start')->name('start-quiz');
-    Route::post('/quizzes/{quiz_id}/simulation/{index}', 'answer')->name('answer-quiz');
-    Route::patch('/quizzes/{quiz_id}/simulation', 'finish')->name('finish-quiz');
+    Route::get('/quizzes/{quiz_id}/simulation', 'start')->name('quiz-simulations.start');
+    Route::post('/quizzes/{quiz_id}/simulation/{index}', 'answer')->name('quiz-simulations.answer');
+    Route::patch('/quizzes/{quiz_id}/simulation', 'finish')->name('quiz-simulations.finish');
 });
 
 Route::get("/403", function(){
@@ -71,8 +71,8 @@ Route::fallback(function(){
 });
 
 /* Bryan D */
-Route::get('/my-class/{class_id}', [ClassController::class, "classDetail"]);
-Route::get('/my-classes', [ClassController::class, "classList"]);
+Route::get('/my-class/{class_id}', [ClassController::class, "classDetail"])->middleware('auth');
+Route::get('/my-classes', [ClassController::class, "classList"])->middleware('auth');
 
 Route::get('/my-class/quiz-history', function(){
     return view('pages.my-class-quiz-history',['signedIn'=>true]);

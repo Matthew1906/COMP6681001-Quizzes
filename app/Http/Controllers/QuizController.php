@@ -66,7 +66,7 @@ class QuizController extends Controller
         $new_quiz->repeat = Arr::exists($req, 'repeat')?1:0;
         $new_quiz->status = 0;
         $new_quiz->save();
-        return redirect(route('edit-quiz', ['quiz_id'=>$new_quiz->id]));
+        return redirect(route('quizzes.edit', ['quiz_id'=>$new_quiz->id]));
     }
 
     function edit($quiz_id){
@@ -87,7 +87,7 @@ class QuizController extends Controller
         $quiz->deadline = $req->deadline;
         $quiz->repeat = Arr::exists($req, 'repeat')?1:0;
         $quiz->save();
-        return redirect(route('edit-quiz', ['quiz_id'=>$quiz->id]));
+        return redirect(route('quizzes.edit', ['quiz_id'=>$quiz->id]));
     }
 
     public function save($quiz_id){
