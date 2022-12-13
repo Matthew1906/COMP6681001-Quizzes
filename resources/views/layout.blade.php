@@ -27,8 +27,8 @@
                 <ul class="navbar-nav fs-5">
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link text-white active" aria-current="page" href="/my-classes/">
-                                <ion-icon name="people" size='medium'></ion-icon> MY CLASS
+                            <a class="nav-link text-white active" aria-current="page" href="{{route('classes.index')}}">
+                                <ion-icon name="people" size='medium'></ion-icon> MY CLASSES
                             </a>
                         </li>
                     @endauth
@@ -54,10 +54,10 @@
                         </h2>
                         <ul class='dropdown-menu dropdown-menu-end'>
                             <li>
-                                <a href="{{ route('profile') }}" class='dropdown-item btn bg-white text-turqouise hover-pink fs-5'>Profile</a>
+                                <a href="{{ route('users.profile', ['user_id'=>Auth::id()]) }}" class='dropdown-item btn bg-white text-turqouise hover-pink fs-5'>Profile</a>
                             </li>
                             <li>
-                                <form action="{{ route('logout') }}" method="POST" class='m-0'>
+                                <form action="{{ route('users.logout') }}" method="POST" class='m-0'>
                                     @csrf
                                     <button class='dropdown-item btn bg-white text-turqouise hover-pink fs-5'>
                                         Logout
@@ -68,10 +68,10 @@
                     </div>
                 @else
                     <div class='d-flex justify-content-start lg:justify-content-center text-secondary'>
-                        <a href="{{ route('login') }}" class='btn bg-white text-turqouise hover-pink fw-bold me-2 '>
+                        <a href="{{ route('users.login') }}" class='btn bg-white text-turqouise hover-pink fw-bold me-2 '>
                             Login
                         </a>
-                        {{-- <a href="{{ route('register') }}" class='btn bg-white text-turqouise hover-pink fw-bold'>
+                        {{-- <a href="{{ route('users.create') }}" class='btn bg-white text-turqouise hover-pink fw-bold'>
                             Register
                         </a> --}}
                     </div>

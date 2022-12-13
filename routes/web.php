@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\QuizProblemController;
@@ -21,22 +22,27 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [QuizController::class, 'dashboard'])->name("home")->middleware("auth");
 
-Route::controller(UserController::class)->group(function(){
-    Route::get('/login', 'login')->name('login');
-    Route::post('/login', 'login_user')->name('login_user');
-    Route::get('/register', 'register')->name('register');
-    Route::post('/register', 'register_user')->name('register_user');
-    Route::post('/logout', 'logout')->name("logout");
-    Route::get('/profile', 'profile')->name("profile");
+Route::controller(AuthController::class)->group(function(){
+    Route::get('/login', 'login')->name('users.login');
+    Route::post('/login', 'authenticate')->name('users.authenticate');
+    Route::get('/register', 'create')->name('users.create');
+    Route::post('/register', 'store')->name('users.store');
+    Route::post('/logout', 'logout')->name("users.logout");
 });
 
-Route::get('/quizHistory', function () {
-    return view('pages.quiz-history', ['signedIn'=>true]);
+Route::controller(UserController::class)->group(function(){
+    Route::get('/users/{user_id}', 'profile')->name('users.profile');
+    Route::get('/users/{user_id}/histories/{quiz_id}', 'history')->name('users.history');
 });
 
 Route::controller(ContactController::class)->group(function(){
     Route::get('/contact', 'create')->name('contact-us');
     Route::post('/contact', 'store')->name('send-message');
+});
+
+Route::controller(ClassController::class)->group(function(){
+    Route::get('/classes', "index")->name('classes.index');
+    Route::get('/classes/{class_id}', "show")->name('classes.show');
 });
 
 Route::controller(QuizController::class)->group(function(){
@@ -68,12 +74,4 @@ Route::get("/403", function(){
 
 Route::fallback(function(){
     return redirect(route("home"));
-});
-
-/* Bryan D */
-Route::get('/my-class/{class_id}', [ClassController::class, "classDetail"])->middleware('auth');
-Route::get('/my-classes', [ClassController::class, "classList"])->middleware('auth');
-
-Route::get('/my-class/quiz-history', function(){
-    return view('pages.my-class-quiz-history',['signedIn'=>true]);
 });

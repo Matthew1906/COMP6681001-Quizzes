@@ -13,11 +13,11 @@
                     </h3>
                 @endauth
                 <div class="d-flex justify-content-center align-items-center">
-                    <a href="{{ route('profile') }}"
+                    <a href="{{ route('users.profile', ['user_id'=>Auth::id()]) }}"
                         class='my-3 me-2 btn btn-lg bg-turqouise text-secondary fw-bold fs-5 text-white hover-bg-pink justify-content-center align-items-center'>
                         See Profile Details
                     </a>
-                    <form action="{{ route('logout') }}" method="POST" class='m-0'>
+                    <form action="{{ route('users.logout') }}" method="POST" class='m-0'>
                         @csrf
                         <button type="submit"
                             class='btn btn-lg bg-turqouise text-secondary fw-bold fs-5 text-white hover-bg-pink justify-content-center align-items-center'>

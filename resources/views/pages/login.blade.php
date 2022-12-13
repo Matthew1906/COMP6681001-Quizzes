@@ -5,7 +5,7 @@
 @section('body')
 <div class="container bg-white mb-3 py-3 px-5 border border-2 border-dark rounded w-50">
     <div class="col">
-        <form method="POST" action="/login" class="text-center">
+        <form method="POST" action="{{route('users.authenticate')}}" class="text-center">
             @csrf
             <div class="row justify-content-center">
                 <h2 class="text-center">Login to Quizzes</h2>
@@ -23,7 +23,7 @@
         </form>
         <div class="row mt-3 text-center">
             <p class="col-xs-6 fw-bold fs-6">Don't have an account?</p>
-            <a class="col-xs-6 text-pink fw-bold fs-6" href="{{ route('register') }}">Sign up here</a>
+            <a class="col-xs-6 text-pink fw-bold fs-6" href="{{ route('users.create') }}">Sign up here</a>
         </div>
       </div>
 </div>

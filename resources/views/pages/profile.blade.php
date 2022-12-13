@@ -1,5 +1,7 @@
 @extends('layout')
 
+@section("title", 'Profile')
+
 @section('body')
     <div class='px-2 text-center w-75'>
             <div class="d-flex flex-column align-items-center bg-white mb-3 py-3 px-5 border border-2 border-dark rounded">

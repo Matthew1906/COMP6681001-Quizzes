@@ -8,7 +8,7 @@
         <img src="https://i.ibb.co/JjSwF3X/pexels-picjumbocom-196650.jpg" class="w-100 h-100" alt="">
     </div>
     <div class="col mb-3 py-3">
-        <form method="POST" action="/register" class="text-center">
+        <form method="POST" action="{{route('users.store')}}" class="text-center">
             @csrf
             <div class="row py-2">
                 <label for="name" class=" text-pink fw-bold fs-4 text-start" style="margin-left: -10px">Full Name</label>
@@ -33,12 +33,12 @@
                     <option value= 1 >Teacher</option>
                   </select>
             </div>
-            <button type="submit" href="{{ route('login') }}" class="btn btn-light border border-2 border-dark mt-3 text-pink fw-bold fs-6">Register</button>
+            <button type="submit" class="btn btn-light border border-2 border-dark mt-3 text-pink fw-bold fs-6">Register</button>
         </form>
         <h2 class="fw-bold fs-4 text-center py-3">-----------------OR-----------------</h2>
         <div class="row text-center">
             <p class="col-xs-6 fw-bold fs-6">Already have an account?</p>
-            <a class="col-xs-6 text-pink fw-bold fs-6" href="{{ route('login') }}">Sign in here</a>
+            <a class="col-xs-6 text-pink fw-bold fs-6" href="{{ route('users.login') }}">Sign in here</a>
         </div>
       </div>
 </div>
