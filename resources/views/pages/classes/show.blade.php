@@ -36,21 +36,55 @@
                         @foreach ($class->quizzes as $quiz)
                             <li class="py-1">
                                 <div class='d-flex align-items-center'>
-                                    @if ($quiz->start_date > \Carbon\Carbon::now())
-                                        <span>{{ $quiz->name }} -
-                                            {{ \Carbon\Carbon::parse($quiz->start_date)->format('d F Y') }}</span>
-                                    @elseif ($quiz->start_date < \Carbon\Carbon::now() && $quiz->deadline > \Carbon\Carbon::now())
-                                        <span class='me-2'>{{ $quiz->name }}</span>
-                                        <a href="{{ route('quiz-simulations.start', ['quiz_id' => $quiz->id]) }}"
+
+                                    @if(Auth::user()->role->name == "teacher")
+                                        @if ($quiz->start_date > \Carbon\Carbon::now())
+                                        <span class="mx-1">{{ $quiz->name }} -
+                                                {{ \Carbon\Carbon::parse($quiz->start_date)->format('d F Y') }}</span>
+                                            <a href="{{ route('quizzes.edit', ['quiz_id' => $quiz->id]) }}"
+                                            class='btn btn-sm bg-orange hover-bg-pink text-white mx-1'>
+                                            Edit Quiz
+                                            </a>
+                                            <form action="/quizzes/{{$quiz->id}}" method="POST">
+                                                @method("DELETE")
+                                                <button
+                                                class='btn btn-sm bg-orange hover-bg-pink text-white'>
+                                                Delete Quiz
+                                                </button>
+                                            </form>
+                                        @elseif ($quiz->start_date < \Carbon\Carbon::now() && $quiz->deadline > \Carbon\Carbon::now())
+                                            <span class='me-2'>{{ $quiz->name }}</span>
+                                            <a href="{{ route('class-history.show', ['quiz_id' => $quiz->id, 'class_id' => $quiz->class_id]) }}"
                                             class='btn btn-sm bg-orange hover-bg-pink text-white'>
-                                            Attempt
-                                        </a>
-                                    @else
+                                            Quiz History
+                                            </a>
+                                        @else
                                         <span>{{ $quiz->name }}</span>
                                         <a href="#" class='d-flex align-items-center'>
                                             <ion-icon name="search-outline" class='text-pink'></ion-icon>
                                         </a>
+                                        @endif
+                                        
+                                    @elseif(Auth::user()->role->name == "student") 
+                                        @if ($quiz->start_date > \Carbon\Carbon::now())
+                                            <span>{{ $quiz->name }} -
+                                                {{ \Carbon\Carbon::parse($quiz->start_date)->format('d F Y') }}</span>
+                                        @elseif ($quiz->start_date < \Carbon\Carbon::now() && $quiz->deadline > \Carbon\Carbon::now())
+                                            <span class='me-2'>{{ $quiz->name }}</span>
+                                            <a href="{{ route('quiz-simulations.start', ['quiz_id' => $quiz->id]) }}"
+                                            class='btn btn-sm bg-orange hover-bg-pink text-white'>
+                                            Attempt
+                                            </a>
+                                        @else
+                                        <span>{{ $quiz->name }}</span>
+                                        <a href="#" class='d-flex align-items-center'>
+                                            <ion-icon name="search-outline" class='text-pink'></ion-icon>
+                                        </a>
+                                        @endif
                                     @endif
+
+
+                                    
                                 </div>
                             </li>
                         @endforeach

@@ -32,7 +32,7 @@ class QuizController extends Controller
     function index(Request $req)
     {
         if(Auth::check()){
-            $classes = ClassGroup::whereRelation('students', 'id', '=', Auth::id())->pluck('id');
+            $classes = ClassGroup::whereRelation(Auth::user()->role->name."s", 'id', '=', Auth::id())->pluck('id');
             $quizzes = Quiz::where('status', '=', 1)->where('start_date', '<=', Carbon::now())
                 ->where('deadline', '>', Carbon::now())->whereIn('class_id', $classes);
         }
@@ -95,5 +95,14 @@ class QuizController extends Controller
         $quiz->status = 1;
         $quiz->save();
         return redirect(route('home'));
+    }
+
+    public function delete($quiz_id){
+        $quiz = Quiz::find($quiz_id);
+        if($quiz->start_date > Carbon::now()) {
+            Quiz::destroy($quiz_id);
+            return redirect(route('classes.index'));
+        }
+        
     }
 }

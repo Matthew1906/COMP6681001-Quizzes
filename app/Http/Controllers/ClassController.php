@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\ClassGroup;
+use App\Models\Quiz;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ClassController extends Controller
@@ -28,6 +30,13 @@ class ClassController extends Controller
     {
         $class = ClassGroup::where('id', $class_id)->first();
         return view('pages.classes.show', ['class'=>$class]);
+    }
+
+    public function showHistory($class_id, $quiz_id) {
+        $quiz = Quiz::where('id', $quiz_id)->first();
+        $class = ClassGroup::where('id', $class_id)->first();
+        // dd($class);
+        return view('pages.classes.showHistory', ['quiz' => $quiz, 'class'=>$class]);
     }
 
 }
