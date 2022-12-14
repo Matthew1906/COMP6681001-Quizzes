@@ -21,16 +21,20 @@ class QuizSimulationController extends Controller
     public function start($quiz_id){
         $quiz = Quiz::find($quiz_id);
         if(Carbon::now()>$quiz->deadline){
-            return redirect(route('home'));
+            return back();
         }
-        $problems = QuizProblem::where('quiz_id', '=', $quiz_id)->paginate(1);
-        if(!QuizHistory::where('quiz_id', '=', $quiz_id)->where('user_id', '=', Auth::id())->first()){
+        $history = QuizHistory::where('user_id', '=', Auth::id())->where('quiz_id', '=', $quiz_id)->first();
+        if(!$history){
             $new_history = new QuizHistory;
             $new_history->quiz_id = $quiz_id;
             $new_history->user_id = Auth::id();
             $new_history->status = 0;
             $new_history->save();
         }
+        else if($history->status == 1 && $quiz->redoable==0){
+            return back();
+        }
+        $problems = QuizProblem::where('quiz_id', '=', $quiz_id)->paginate(1);
         return view('pages.quizzes.simulation', ['problems'=>$problems]);
     }
 

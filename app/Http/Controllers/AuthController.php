@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function create()
     {
-        return view('pages.register');
+        return view('pages.auth.register');
     }
 
     public function store(Request $request) {
@@ -34,7 +34,7 @@ class AuthController extends Controller
     }
 
     public function login() {
-        return view('pages.login');
+        return view('pages.auth.login');
     }
 
     public function authenticate(Request $request)

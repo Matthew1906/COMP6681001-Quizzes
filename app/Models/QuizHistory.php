@@ -12,7 +12,7 @@ class QuizHistory extends Model
 
     public function participant()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function quiz() {
