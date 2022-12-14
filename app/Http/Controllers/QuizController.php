@@ -32,7 +32,7 @@ class QuizController extends Controller
     function index(Request $req)
     {
         if(Auth::check()){
-            $classes = ClassGroup::whereRelation('students', 'id', '=', Auth::id())->pluck('id');
+            $classes = ClassGroup::whereRelation(Auth::user()->role->name."s", 'id', '=', Auth::id())->pluck('id');
             $quizzes = Quiz::where('status', '=', 1)->where('start_date', '<=', Carbon::now())
                 ->where('deadline', '>', Carbon::now())->whereIn('class_id', $classes);
         }

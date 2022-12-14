@@ -43,6 +43,7 @@ Route::controller(ContactController::class)->group(function(){
 Route::controller(ClassController::class)->group(function(){
     Route::get('/classes', "index")->name('classes.index');
     Route::get('/classes/{class_id}', "show")->name('classes.show');
+    Route::get('/classes/{class_id}/histories/{quiz_id}', "showHistory")->name('class-history.show');
 });
 
 Route::controller(QuizController::class)->group(function(){

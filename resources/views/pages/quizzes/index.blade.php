@@ -40,19 +40,31 @@
                                 <h6 class="card-text">Your Score: {{$history->first()->score()}}/10</h6>
                             @endif
                         @endauth
-                        <p class="card-text"> {{ $quiz->histories->count() }}/{{ $quiz->class->students->count() }} students
-                            have tried this quiz</p>
-                        @auth
-                            @if (!$done || ($done && $redoable))
-                                <a href="{{ route('quiz-simulations.start', ['quiz_id' => $quiz->id]) }}" class="btn bg-turqouise text-white hover-bg-pink">
-                                    Attempt
-                                </a>
-                            @else
-                                <a class="btn bg-pink text-white">
-                                    You already did this quiz!
-                                </a>
-                            @endif
-                        @endauth
+
+
+                        @if(Auth::user()->role->id == 1)
+                            <p class="card-text"> {{ $quiz->histories->count() }}/{{ $quiz->class->students->count() }} students
+                                have tried this quiz</p>
+                                    <a href="{{ route('class-history.show', ['quiz_id' => $quiz->id, 'class_id' => $quiz->class_id]) }}" class="btn bg-turqouise text-white hover-bg-pink">
+                                       Quiz History
+                                    </a>
+                        @elseif(Auth::user()->role->id == 2)
+                            <p class="card-text"> {{ $quiz->histories->count() }}/{{ $quiz->class->students->count() }} students
+                                have tried this quiz</p>
+                            @auth
+                                @if (!$done || ($done && $redoable))
+                                    <a href="{{ route('quiz-simulations.start', ['quiz_id' => $quiz->id]) }}" class="btn bg-turqouise text-white hover-bg-pink">
+                                        Attempt
+                                    </a>
+                                @else
+                                    <a class="btn bg-pink text-white">
+                                        You already did this quiz!
+                                    </a>
+                                @endif
+                            @endauth
+                        @endif
+
+                        
                     </div>
                 </div>
             @endforeach
