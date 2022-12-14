@@ -53,6 +53,7 @@ Route::controller(QuizController::class)->group(function(){
     Route::get('/quizzes/{quiz_id}', 'edit')->name('quizzes.edit')->middleware(['auth', 'teacher_only']);
     Route::patch('/quizzes/{quiz_id}', 'update')->name('quizzes.update')->middleware(['auth', 'teacher_only']);
     Route::post('/quizzes/{quiz_id}', 'save')->name('quizzes.save')->middleware(['auth', 'teacher_only']);
+    Route::delete('/quizzes/{quiz_id}', 'delete')->name('quizzes.destroy')->middleware(['auth', 'teacher_only']);
 });
 
 Route::controller(QuizProblemController::class)->group(function(){

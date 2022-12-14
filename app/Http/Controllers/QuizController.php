@@ -96,4 +96,13 @@ class QuizController extends Controller
         $quiz->save();
         return redirect(route('home'));
     }
+
+    public function delete($quiz_id){
+        $quiz = Quiz::find($quiz_id);
+        if($quiz->start_date > Carbon::now()) {
+            Quiz::destroy($quiz_id);
+            return redirect(route('classes.index'));
+        }
+        
+    }
 }
