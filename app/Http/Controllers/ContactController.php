@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -19,6 +20,16 @@ class ContactController extends Controller
             'subject'=>'required',
             'message'=>'required'
         ]);
-        dd($req);
+        $contact_message = new ContactMessage(
+            [
+                'name'=>$req->name,
+                'email'=>$req->email,
+                'subject'=>$req->subject,
+                'message'=>$req->message
+            ]
+        );
+        $contact_message->status = 0;
+        $contact_message->save();
+        return back()->with('success', 'Message has been sent to admin!');
     }
 }

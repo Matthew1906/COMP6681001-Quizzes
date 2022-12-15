@@ -20,40 +20,43 @@
                         <h5 class="card-title">{{ $quiz->name }}</h5>
                         <h6 class="card-text">Class: {{ $quiz->class->name }}</h6>
                         @php
-                            $scores = $quiz->histories->map(function($value, $key){
-                                if($value['status'] == 1){
-                                    return $value->score();
-                                }
-                            })->whereNotNull();
+                            $scores = $quiz->histories
+                                ->map(function ($value, $key) {
+                                    if ($value['status'] == 1) {
+                                        return $value->score();
+                                    }
+                                })
+                                ->whereNotNull();
                         @endphp
-                        <h6 class="card-text">Average Score: {{$scores->count()>0?$scores->avg():"?"}}/10</h6>
+                        <h6 class="card-text">Average Score: {{ $scores->count() > 0 ? $scores->avg() : '?' }}/10</h6>
                         @auth
                             {{-- If the user hasn't done the quiz or user has done the quiz but the quiz is redoable --}}
                             @php
-                                $history = Auth::user()->history->filter(function ($value, $key) use($quiz) {
-                                    return $value['quiz_id'] == $quiz->id && $value['status']==1;
+                                $history = Auth::user()->history->filter(function ($value, $key) use ($quiz) {
+                                    return $value['quiz_id'] == $quiz->id && $value['status'] == 1;
                                 });
                                 $done = $history->count() > 0;
                                 $redoable = $quiz->repeat;
                             @endphp
-                            @if($done)
-                                <h6 class="card-text">Your Score: {{$history->first()->score()}}/10</h6>
+                            @if ($done)
+                                <h6 class="card-text">Your Score: {{ $history->first()->score() }}/10</h6>
                             @endif
-                        @endauth
+                            @if (Auth::user()->role->name == 'teacher')
+                                <p class="card-text"> {{ $quiz->histories->count() }}/{{ $quiz->class->students->count() }}
+                                    students
+                                    have tried this quiz</p>
+                                <a href="{{ route('class-history.show', ['quiz_id' => $quiz->id, 'class_id' => $quiz->class_id]) }}"
+                                    class="btn bg-turqouise text-white hover-bg-pink">
+                                    Quiz History
+                                </a>
+                            @elseif(Auth::user()->role->id == 'student')
+                                <p class="card-text"> {{ $quiz->histories->count() }}/{{ $quiz->class->students->count() }}
+                                    students
+                                    have tried this quiz</p>
 
-
-                        @if(Auth::user()->role->name == "teacher")
-                            <p class="card-text"> {{ $quiz->histories->count() }}/{{ $quiz->class->students->count() }} students
-                                have tried this quiz</p>
-                                    <a href="{{ route('class-history.show', ['quiz_id' => $quiz->id, 'class_id' => $quiz->class_id]) }}" class="btn bg-turqouise text-white hover-bg-pink">
-                                       Quiz History
-                                    </a>
-                        @elseif(Auth::user()->role->id == "student")
-                            <p class="card-text"> {{ $quiz->histories->count() }}/{{ $quiz->class->students->count() }} students
-                                have tried this quiz</p>
-                            @auth
                                 @if (!$done || ($done && $redoable))
-                                    <a href="{{ route('quiz-simulations.start', ['quiz_id' => $quiz->id]) }}" class="btn bg-turqouise text-white hover-bg-pink">
+                                    <a href="{{ route('quiz-simulations.start', ['quiz_id' => $quiz->id]) }}"
+                                        class="btn bg-turqouise text-white hover-bg-pink">
                                         Attempt
                                     </a>
                                 @else
@@ -61,10 +64,8 @@
                                         You already did this quiz!
                                     </a>
                                 @endif
-                            @endauth
-                        @endif
-
-                        
+                            @endif
+                        @endauth
                     </div>
                 </div>
             @endforeach
