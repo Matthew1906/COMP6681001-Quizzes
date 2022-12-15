@@ -8,8 +8,13 @@
             <form action="{{ route('contact-us.store') }}" class="text-left" method="POST">
                 @csrf
                 <div class="row justify-content-center mb-3">
-                    <h2 class="text-center text-primary text-black">Contact Us</h2>
-                    <h3 class="text-center text-primary text-pink">Email:quizzes.cs@gmail.com</h3>
+                    <div class="text-center d-flex justify-content-center align-items-center">
+                        <a href="{{url()->previous()}}" class='float-start fs-2 text-black ms-1'>
+                            <ion-icon name="arrow-undo"></ion-icon>
+                        </a>
+                        <h2 class="text-primary text-black">Contact Us</h2>
+                    </div>
+                    <h3 class="text-center text-primary text-pink fs-3">Email:quizzes.cs@gmail.com</h3>
                 </div>
                 @include('components.flash-messages')
                 <div class="row mb-3">

@@ -8,7 +8,12 @@
                 <div class='mx-3 flex-grow-1'>
                     <div class="d-flex flex-column row align-items-center mt-1 pb-3 px-2 text-center">
                         <div class="row text-center align-items-center">
-                            <h2 class="text-turqouise fw-bold mb-3">My Profile</h2>
+                            <div class="text-center d-flex justify-content-center align-items-center mb-3">
+                                <a href="{{url()->previous()}}" class='float-start fs-2 text-turqouise ms-1'>
+                                    <ion-icon name="arrow-undo"></ion-icon>
+                                </a>
+                                <h2 class="text-turqouise fw-bold">My Profile</h2>
+                            </div>
                             <div class="d-flex flex-column align-items-start mb-3 py-3 px-5 border border-2 border-pink rounded">
                                 @if (Auth::user()->role_id === 1)
                                     <h4 class="text-turqouise">Teacher: <span class='text-orange'>{{Auth::user()->full_name}}</span></h4>

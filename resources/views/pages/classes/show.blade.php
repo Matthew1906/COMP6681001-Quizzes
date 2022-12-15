@@ -6,7 +6,10 @@
 
     <div
         class="container d-flex flex-column align-items-center bg-white py-3 border border-2 border-dark rounded w-75 h-100">
-        <div class="text-center">
+        <div class="text-center d-flex justify-content-center align-items-center">
+            <a href="{{url()->previous()}}" class='float-start fs-2 text-turqouise ms-1'>
+                <ion-icon name="arrow-undo"></ion-icon>
+            </a>
             <h1 class="text-success fw-bold">Class {{ $class->name }}</h1>
         </div>
         <div class="container d-flex col align-self-end text-black py-3">

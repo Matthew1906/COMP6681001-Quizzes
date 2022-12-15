@@ -8,7 +8,12 @@
                 <div class='mx-3 flex-grow-1'>
                     <div class="row g-3 justify-content-center align-items-center mt-1 pb-3 px-2">
                         <div class="col-auto">
-                            <h2 class="text-pink fw-bold">Class {{$history->quiz->class->name}} - {{$history->quiz->name}}</h2>
+                            <div class='d-flex justify-content-center align-items-center'>
+                                <a href="{{url()->previous()}}" class='float-start fs-2 text-pink ms-1'>
+                                    <ion-icon name="arrow-undo"></ion-icon>
+                                </a>
+                                <h2 class="text-pink fw-bold">Class {{$history->quiz->class->name}} - {{$history->quiz->name}}</h2>
+                            </div>
                             <h4 class="text-pink fw-bold">{{\Carbon\Carbon::parse($history->quiz->deadline)->format('l, d F Y')}}</h4>
                             <h3 class="text-orange fw-bold">{{$history->participant->full_name}} - {{$history->score()}}/10</h4>
                         </div>

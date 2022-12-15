@@ -5,13 +5,19 @@
 @section('body')
     <div class='px-2 text-center w-75'>
         <div class="d-flex flex-column bg-white mb-3 py-3 px-5 border border-2 border-dark rounded">
-            <div class="row text-center align-items-center mb-2">
-                <h1 class="text-black fw-bold">Class {{ $class->name }}</h1>
+            <div class="row text-center justify-content-center align-items-center mb-2">
+                <div class='d-flex justify-content-center align-items-center'>
+                    <a href="{{url()->previous()}}" class='float-start fs-2 text-black ms-1'>
+                        <ion-icon name="arrow-undo"></ion-icon>
+                    </a>
+                    <h1 class="text-black fw-bold">Class {{ $class->name }}</h1>
+                </div>
                 <h4 class="text-pink">Deadline: {{ $quiz->deadline }}</h4>
+
             </div>
             <div class="row">
                 <div class="col border mx-2 border-orange rounded-2">
-                    <canvas id="chart"></canvas>
+                    <canvas id="chart" class='w-100 h-100'></canvas>
                 </div>
                 <div class="col border mx-2 border-pink rounded-2">
                     <div class="row mt-2 border-bottom rounded border-pink">

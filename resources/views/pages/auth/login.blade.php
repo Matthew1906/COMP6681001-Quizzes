@@ -19,7 +19,7 @@
                 <label for="password" class="text-center text-pink fw-bold fs-4 mb-1">Password</label>
                 <input type="password" class="form-control border border-2 border-dark rounded" name="password" placeholder="Password">
             </div>
-            <button type="submit" class="btn bg-turqouise hover-bg-pink text-white mt-3">Login</button>
+            <button type="submit" class="btn bg-turqouise hover-bg-pink text-white fw-semibold mt-3">Login</button>
         </form>
         <div class="row mt-3 text-center">
             <p class="col-xs-6 fw-bold fs-6">Don't have an account?</p>
