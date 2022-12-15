@@ -29,17 +29,30 @@
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-turqouise fw-bold mb-3">Participated Quizzes:</h3>
+                        <h3 class="text-turqouise fw-bold mb-3">
+                        @if(Auth::user()->role->name=='student')
+                            Participated Quizzes:
+                        @else
+                            Held Quizzes:
+                        @endif
+                        </h3>
                         <ul class="d-flex flex-column align-items-start mb-3 py-3 px-5 border border-2 border-orange rounded">
                             @foreach($histories as $history)
                                 <li class="text-pink fs-5">
                                     <div class='d-flex align-items-center'>
+                                        @if(Auth::user()->role->name=='student')
                                         <span class='fw-bold me-2'>{{ $history->quiz->name }}</span>
-                                        {{-- @if($history->quiz->deadline <= \Carbon\Carbon::now()) --}}
+                                        @if($history->quiz->deadline <= \Carbon\Carbon::now())
                                             <a href="{{route('users.history', ['user_id'=>Auth::id(), 'quiz_id'=>$history->quiz_id])}}" class='btn bg-turqouise hover-bg-pink d-flex align-items-center'>
                                                 <ion-icon name="search-outline" class='text-white'></ion-icon>
                                             </a>
-                                        {{-- @endif --}}
+                                        @endif
+                                        @else
+                                        <span class='fw-bold me-2'>{{ $history->name }}</span>
+                                        <a href="{{route('classes.history', ['class_id'=>$history->class_id, 'quiz_id'=>$history->id])}}" class='btn bg-turqouise hover-bg-pink d-flex align-items-center'>
+                                            <ion-icon name="search-outline" class='text-white'></ion-icon>
+                                        </a>
+                                        @endif
                                     </div>
                                 </li>
                             @endforeach

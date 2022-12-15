@@ -43,7 +43,7 @@ Route::controller(ContactController::class)->group(function(){
 Route::controller(ClassController::class)->group(function(){
     Route::get('/classes', "index")->name('classes.index');
     Route::get('/classes/{class_id}', "show")->name('classes.show');
-    Route::get('/classes/{class_id}/histories/{quiz_id}', "showHistory")->name('class-history.show');
+    Route::get('/classes/{class_id}/histories/{quiz_id}', "history")->name('classes.history');
 });
 
 Route::controller(QuizController::class)->group(function(){
@@ -53,7 +53,7 @@ Route::controller(QuizController::class)->group(function(){
     Route::get('/quizzes/{quiz_id}', 'edit')->name('quizzes.edit')->middleware(['auth', 'teacher_only']);
     Route::patch('/quizzes/{quiz_id}', 'update')->name('quizzes.update')->middleware(['auth', 'teacher_only']);
     Route::post('/quizzes/{quiz_id}', 'save')->name('quizzes.save')->middleware(['auth', 'teacher_only']);
-    Route::delete('/quizzes/{quiz_id}', 'delete')->name('quizzes.destroy')->middleware(['auth', 'teacher_only']);
+    Route::delete('/quizzes/{quiz_id}', 'destroy')->name('quizzes.destroy')->middleware(['auth', 'teacher_only']);
 });
 
 Route::controller(QuizProblemController::class)->group(function(){

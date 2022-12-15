@@ -16,20 +16,24 @@ class QuizController extends Controller
 
     function dashboard()
     {
-        $average_score = QuizHistory::where('user_id', '=', Auth::id())->get()
-            ->map(function($history){
-                return $history->score();
-            }
-        )->average();
-        // ganti 'students' jadi Auth::user()->role->name."s" di line 25, dan nambah $quizzes untuk display average score di view
         $classes = ClassGroup::whereRelation(Auth::user()->role->name."s", 'id', '=', Auth::id())->pluck('id');
         $histories = QuizHistory::where('user_id', '=', Auth::id())->where('status', '!=', 1)->pluck('quiz_id');
-        $closest_start = Quiz::where('status', '=', 1)->where('start_date', '>', Carbon::now())->orderBy('start_date')->first();
-        $closest_deadline = Quiz::where('status', '=', 1)->where('start_date', '<=', Carbon::now())->where('deadline', '>', Carbon::now())
-            ->whereIn('class_id', $classes)->whereNotIn('id', $histories)->orderBy('deadline')->first();
-        $quizzes = Quiz::where('status', '=', 1)->where('start_date', '<=', Carbon::now())
-            ->where('deadline', '>', Carbon::now())->whereIn('class_id', $classes);
-        return view('pages.home', ['average_score'=>$average_score?$average_score:0, 'closest_start'=>$closest_start, 'closest_deadline'=>$closest_deadline, 'quizzes'=>$quizzes]);
+        if(Auth::user()->role->name == 'student'){
+            $average_score = QuizHistory::where('user_id', '=', Auth::id())->get()
+                ->map(function($history){
+                    return $history->score();
+                }
+            )->average();
+            $closest_start = Quiz::where('status', '=', 1)->where('start_date', '>', Carbon::now())->orderBy('start_date')->first();
+            $closest_deadline = Quiz::where('status', '=', 1)->where('start_date', '<=', Carbon::now())->where('deadline', '>', Carbon::now())
+                ->whereIn('class_id', $classes)->whereNotIn('id', $histories)->orderBy('deadline')->first();
+            return view('pages.home', ['average_score'=>$average_score?$average_score:0, 'closest_start'=>$closest_start, 'closest_deadline'=>$closest_deadline]);
+        }
+        else{
+            $quizzes = Quiz::where('status', '=', 1)->where('start_date', '<=', Carbon::now())
+                ->where('deadline', '>', Carbon::now())->whereIn('class_id', $classes)->get();
+            return view('pages.home', ['quizzes'=>$quizzes]);
+        }
     }
 
     function index(Request $req)
@@ -62,6 +66,7 @@ class QuizController extends Controller
             "deadline"=>'required|date|after_or_equal:'.Carbon::now()->format("m/d/Y H:i"),
         ]);
         $new_quiz = new Quiz;
+        $new_quiz->class_id = $req->class;
         $new_quiz->name = $req->name;
         $new_quiz->description = $req->description;
         $new_quiz->start_date = $req->start_date;
@@ -100,12 +105,11 @@ class QuizController extends Controller
         return redirect(route('home'));
     }
 
-    public function delete($quiz_id){
+    public function destroy($quiz_id){
         $quiz = Quiz::find($quiz_id);
         if($quiz->start_date > Carbon::now()) {
             Quiz::destroy($quiz_id);
-            return redirect(route('classes.index'));
         }
-
+        return back();
     }
 }

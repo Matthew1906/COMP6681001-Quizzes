@@ -45,11 +45,11 @@
                                 <p class="card-text"> {{ $quiz->histories->count() }}/{{ $quiz->class->students->count() }}
                                     students
                                     have tried this quiz</p>
-                                <a href="{{ route('class-history.show', ['quiz_id' => $quiz->id, 'class_id' => $quiz->class_id]) }}"
+                                <a href="{{ route('classes.history', ['quiz_id' => $quiz->id, 'class_id' => $quiz->class_id]) }}"
                                     class="btn bg-turqouise text-white hover-bg-pink">
                                     Quiz History
                                 </a>
-                            @elseif(Auth::user()->role->id == 'student')
+                            @elseif(Auth::user()->role->name == 'student')
                                 <p class="card-text"> {{ $quiz->histories->count() }}/{{ $quiz->class->students->count() }}
                                     students
                                     have tried this quiz</p>
