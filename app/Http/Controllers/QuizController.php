@@ -21,12 +21,15 @@ class QuizController extends Controller
                 return $history->score();
             }
         )->average();
-        $classes = ClassGroup::whereRelation('students', 'id', '=', Auth::id())->pluck('id');
+        // ganti 'students' jadi Auth::user()->role->name."s" di line 25, also nambah $quizzes untuk display average score di view
+        $classes = ClassGroup::whereRelation(Auth::user()->role->name."s", 'id', '=', Auth::id())->pluck('id');
         $histories = QuizHistory::where('user_id', '=', Auth::id())->where('status', '!=', 1)->pluck('quiz_id');
         $closest_start = Quiz::where('status', '=', 1)->where('start_date', '>', Carbon::now())->orderBy('start_date')->first();
         $closest_deadline = Quiz::where('status', '=', 1)->where('start_date', '<=', Carbon::now())->where('deadline', '>', Carbon::now())
             ->whereIn('class_id', $classes)->whereNotIn('id', $histories)->orderBy('deadline')->first();
-        return view('pages.home', ['average_score'=>$average_score?$average_score:0, 'closest_start'=>$closest_start, 'closest_deadline'=>$closest_deadline]);
+        $quizzes = Quiz::where('status', '=', 1)->where('start_date', '<=', Carbon::now())
+            ->where('deadline', '>', Carbon::now())->whereIn('class_id', $classes);
+        return view('pages.home', ['average_score'=>$average_score?$average_score:0, 'closest_start'=>$closest_start, 'closest_deadline'=>$closest_deadline, 'quizzes'=>$quizzes]);
     }
 
     function index(Request $req)
@@ -103,6 +106,6 @@ class QuizController extends Controller
             Quiz::destroy($quiz_id);
             return redirect(route('classes.index'));
         }
-        
+
     }
 }

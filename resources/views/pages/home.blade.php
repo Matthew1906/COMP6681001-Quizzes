@@ -37,6 +37,24 @@
                         <h3 class='mb-4 text-secondary text-white text-left font-weight-bold fs-3'>
                             {{ $average_score }}/10
                         </h3>
+
+                        @elseif(Auth::user()->role->name=='teacher')
+                            <h3 class='text-primary text-white text-left font-weight-bold fs-3'>
+                                Class Average Score:
+                            </h3>
+                            {{-- bagian yang salah --}}
+                            @foreach ($quizzes as $quiz)
+                                @php
+                                    $scores = $quiz->histories->map(function($value, $key){
+                                        if($value['status'] == 1){
+                                            return $value->score();
+                                        }
+                                    })->whereNotNull();
+                                @endphp
+                            <div class='text-primary text-white text-left font-weight-bold fs-3'>
+                                Class {{ $quiz->class->name }}: {{$scores->count()>0?$scores->avg():"?"}}/10
+                            </div>
+                            @endforeach
                         @endif
                     </div>
                 </div>
@@ -56,6 +74,20 @@
                         </h3>
                         <h3 class='text-secondary fs-3 text-white text-left font-weight-bold'>on
                             {{ \Carbon\Carbon::parse($closest_deadline->deadline)->format('l, d F Y') }}</h3>
+
+                        @elseif(Auth::user()->role->name=='teacher')
+                            <h3 class='text-primary text-white text-left font-weight-bold fs-3'>
+                                Quizzes created:
+                            </h3>
+                            <div class='text-primary text-white text-left font-weight-bold fs-4'>
+                                @foreach(Auth::user()->classes as $class)
+                                    @foreach($class->quizzes as $quiz)
+                                    <ul>
+                                        <li>{{ $quiz->name }}</li>
+                                    </ul>
+                                    @endforeach
+                                @endforeach
+                            </div>
                         @endif
                     </div>
                 </div>
