@@ -36,8 +36,8 @@ Route::controller(UserController::class)->group(function(){
 });
 
 Route::controller(ContactController::class)->group(function(){
-    Route::get('/contact', 'create')->name('contact-us');
-    Route::post('/contact', 'store')->name('send-message');
+    Route::get('/contact', 'create')->name('contact-us.create');
+    Route::post('/contact', 'store')->name('contact-us.store');
 });
 
 Route::controller(ClassController::class)->group(function(){

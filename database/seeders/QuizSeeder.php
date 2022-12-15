@@ -24,7 +24,7 @@ class QuizSeeder extends Seeder
                 'status'=>1,
                 'repeat'=>0,
                 'start_date'=> new Carbon('first day of December 2022'),
-                'deadline'=> new Carbon('first day of January 2024'),
+                'deadline'=> new Carbon('first day of January 2023'),
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
             ],

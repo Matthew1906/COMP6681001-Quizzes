@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{route('contact-us')}}">
+                        <a class="nav-link text-white" href="{{route('contact-us.create')}}">
                             <ion-icon name="mail"></ion-icon> CONTACT US
                         </a>
                     </li>
