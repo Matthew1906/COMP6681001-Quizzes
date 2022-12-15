@@ -13,7 +13,7 @@
 
                     <div class="container row">
                         <div class="col border mx-2 border-orange">
-                            Graph
+                            Graph Placeholder
                         </div>
 
                         <div class="col border mx-2 border-pink">

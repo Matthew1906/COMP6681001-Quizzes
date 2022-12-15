@@ -42,7 +42,7 @@
                             <h3 class='text-primary text-white text-left font-weight-bold fs-3'>
                                 Class Average Score:
                             </h3>
-                            {{-- bagian yang salah --}}
+                            {{-- bagian yang salah saat display quiz --}}
                             @foreach ($quizzes as $quiz)
                                 @php
                                     $scores = $quiz->histories->map(function($value, $key){

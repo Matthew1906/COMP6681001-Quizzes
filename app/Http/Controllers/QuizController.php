@@ -21,7 +21,7 @@ class QuizController extends Controller
                 return $history->score();
             }
         )->average();
-        // ganti 'students' jadi Auth::user()->role->name."s" di line 25, also nambah $quizzes untuk display average score di view
+        // ganti 'students' jadi Auth::user()->role->name."s" di line 25, dan nambah $quizzes untuk display average score di view
         $classes = ClassGroup::whereRelation(Auth::user()->role->name."s", 'id', '=', Auth::id())->pluck('id');
         $histories = QuizHistory::where('user_id', '=', Auth::id())->where('status', '!=', 1)->pluck('quiz_id');
         $closest_start = Quiz::where('status', '=', 1)->where('start_date', '>', Carbon::now())->orderBy('start_date')->first();
