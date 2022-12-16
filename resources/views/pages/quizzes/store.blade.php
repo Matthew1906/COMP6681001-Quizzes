@@ -13,6 +13,15 @@
             @endif
             <h2 class='text-pink mb-4'>
                 @isset($problem) Edit @else Add New @endif @if ($type == 'mcq')Multiple Choice @else Fill in the Blanks @endif Question</h2>
+                @if ($errors->any())
+                    <div class="alert alert-danger my-1">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
             <div class="row g-3 align-items-center mt-1 pb-3 px-2 border border-2 border-dark rounded">
                 <div class="col-auto">
                     <label for="question" class="col-form-label text-pink fw-bold fs-4">Q: </label>

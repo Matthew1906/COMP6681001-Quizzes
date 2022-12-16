@@ -10,6 +10,15 @@
             <div class="d-flex align-items-start bg-white mb-3 py-3 px-5 border border-2 border-dark rounded">
                 <div class='container-fluid mx-3 flex-grow-1'>
                     <h1 class='row text-orange pb-1'>Create New Quiz</h1>
+                    @if ($errors->any())
+                    <div class="alert alert-danger my-1">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     <input type="hidden" name="class" value="{{request()->input('class')}}">
                     <div class="row g-3 align-items-center mt-1 pb-3 px-2">
                         <div class="col-3 text-start">
@@ -66,14 +75,5 @@
                 </button>
             </div>
         </form>
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
     </div>
 @endsection

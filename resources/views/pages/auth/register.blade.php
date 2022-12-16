@@ -10,6 +10,15 @@
     <div class="col mb-3 py-3">
         <form method="POST" action="{{route('users.store')}}" class="text-center">
             @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger my-1">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="row py-2">
                 <label for="name" class=" text-pink fw-bold fs-4 text-start" style="margin-left: -10px">Full Name</label>
                 <input type="text" class="form-control border border-2 border-dark rounded" name="full_name" aria-describedby="emailHelp" placeholder="Enter full name">

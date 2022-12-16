@@ -19,10 +19,11 @@ class AuthController extends Controller
         $request->validate([
             'role_id' => 'required',
             'full_name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:App\Models\User,email',
             'password' => 'required',
             'dob' => 'required'
         ]);
+
         $user = new User([
             'role_id' => $request->role_id,
             'full_name' => $request->full_name,
@@ -50,9 +51,7 @@ class AuthController extends Controller
             return redirect(route("home"));
         }
 
-        return back()->withErrors([
-            'password' => 'Wrong username or password',
-        ]);
+        return back()->with('error', 'Incorrect email or password');;
     }
 
     public function logout()
