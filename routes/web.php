@@ -28,6 +28,8 @@ Route::controller(AuthController::class)->group(function(){
     Route::get('/register', 'create')->name('users.create');
     Route::post('/register', 'store')->name('users.store');
     Route::post('/logout', 'logout')->name("users.logout");
+    Route::get('/update', 'update')->name("users.update");
+    Route::post('/update', 'renew')->name('users.renew');
 });
 
 Route::controller(UserController::class)->group(function(){

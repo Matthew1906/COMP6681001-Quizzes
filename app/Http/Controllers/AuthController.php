@@ -58,4 +58,29 @@ class AuthController extends Controller
         return redirect(route('home'));
     }
 
+    public function update(){
+        return view ('pages.auth.update');
+    }
+
+    public function renew(Request $request){
+        $request->validate([
+            'password_old' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        $old = $request->password_old;
+        $password = $request->password;
+        $user = Auth::user();
+
+        if(Hash::check($old, Auth::user()->password)) {
+            $user->password = Hash::make($password);
+            $user->save();
+            $message = "Update successful";
+             return view ('pages.auth.update', compact('message'));
+        }
+
+            $message = "Update failed";
+            return view ('pages.auth.update', compact('message'));
+    }
+
 }
