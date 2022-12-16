@@ -15,8 +15,9 @@
                                 <h2 class="text-turqouise fw-bold">Update Password</h2>
                             </div>
                             <div class="d-flex flex-column align-items-center mb-3 py-3 px-5 border border-2 border-pink rounded">
-                                <form method="POST" action="{{route('users.renew')}}" class="text-center">
+                                <form method="POST" action="{{route('users.update')}}" class="text-center">
                                     @csrf
+                                    @include('components.flash-messages')
                                     <div class="row">
                                         <label for="old_password" class="text-center text-pink fw-bold fs-4 mb-1">Old Password</label>
                                         <input type="password" class="form-control border border-2 border-dark rounded" name="password_old" placeholder="Old Password">
@@ -32,13 +33,7 @@
                                     <button type="submit" class="btn bg-turqouise hover-bg-pink text-white fw-semibold mt-3">Update</button>
                                 </form>
                             </div>
-                            <div class="text-center d-flex justify-content-center align-items-center mb-3">
-                                @isset($message)
-                                    <div class="alert alert-success">
-                                        <strong>{{$message}}</strong>
-                                        </div>
-                                @endif
-                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -57,7 +57,7 @@
                                 <a href="{{ route('users.profile', ['user_id'=>Auth::id()]) }}" class='dropdown-item btn bg-white text-turqouise hover-pink fs-5'>Profile</a>
                             </li>
                             <li>
-                                <a href="{{ route('users.update') }}" class='dropdown-item btn bg-white text-turqouise hover-pink fs-5'>Change Password</a>
+                                <a href="{{ route('users.edit') }}" class='dropdown-item btn bg-white text-turqouise hover-pink fs-5'>Change Password</a>
                             </li>
                             <li>
                                 <form action="{{ route('users.logout') }}" method="POST" class='m-0'>

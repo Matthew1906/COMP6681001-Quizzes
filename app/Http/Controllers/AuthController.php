@@ -14,7 +14,8 @@ class AuthController extends Controller
         return view('pages.auth.register');
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $request->validate([
             'role_id' => 'required',
             'full_name' => 'required',
@@ -33,7 +34,8 @@ class AuthController extends Controller
         return redirect(route("login"));
     }
 
-    public function login() {
+    public function login()
+    {
         return view('pages.auth.login');
     }
 
@@ -53,16 +55,19 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(){
+    public function logout()
+    {
         auth()->logout();
         return redirect(route('home'));
     }
 
-    public function update(){
-        return view ('pages.auth.update');
+    public function edit()
+    {
+        return view('pages.auth.edit');
     }
 
-    public function renew(Request $request){
+    public function update(Request $request)
+    {
         $request->validate([
             'password_old' => 'required',
             'password' => 'required|confirmed',
@@ -70,17 +75,11 @@ class AuthController extends Controller
 
         $old = $request->password_old;
         $password = $request->password;
-        $user = Auth::user();
 
-        if(Hash::check($old, Auth::user()->password)) {
-            $user->password = Hash::make($password);
-            $user->save();
-            $message = "Update successful";
-             return view ('pages.auth.update', compact('message'));
+        if (Hash::check($old, Auth::user()->password)) {
+            User::where('id', '=', Auth::id())->update(['password' => Hash::make($password)]);
+            return back()->with('success', 'Update Password Successful!');;
         }
-
-            $message = "Update failed";
-            return view ('pages.auth.update', compact('message'));
+        return back()->with('error', 'Update Password Failed!');;
     }
-
 }
