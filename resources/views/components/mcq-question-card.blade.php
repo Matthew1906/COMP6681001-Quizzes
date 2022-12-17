@@ -20,5 +20,9 @@
             aria-describedby="answer-{{$option}}" @isset($problem)value="{{$problem}}" @endif>
         @endif
     </div>
-    {{-- For error message, use form text!! --}}
 </div>
+@error('answer-'.$option)
+<p class="row g-3 px-4 text-pink fs-6 mt-1">
+    {{ $message }}
+</p>
+@enderror

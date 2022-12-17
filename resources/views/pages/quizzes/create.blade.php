@@ -10,15 +10,6 @@
             <div class="d-flex align-items-start bg-white mb-3 py-3 px-5 border border-2 border-dark rounded">
                 <div class='container-fluid mx-3 flex-grow-1'>
                     <h1 class='row text-orange pb-1'>Create New Quiz</h1>
-                    @if ($errors->any())
-                    <div class="alert alert-danger my-1">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
                     <input type="hidden" name="class" value="{{request()->input('class')}}">
                     <div class="row g-3 align-items-center mt-1 pb-3 px-2">
                         <div class="col-3 text-start">
@@ -30,6 +21,11 @@
                                 class="form-control border border-1 border-dark rounded-2" aria-describedby="title">
                         </div>
                     </div>
+                    @error('name')
+                    <p class="row g-3 px-2 justify-content-end text-pink fs-6 mt-1">
+                        {{ $message }}
+                    </p>
+                    @enderror
                     <div class="row g-3 align-items-start mt-1 pb-3 px-2">
                         <div class="col-3 text-start">
                             <label for='description' class="col-form-label text-pink fw-bold fs-4">Quiz Description:
@@ -40,6 +36,11 @@
                                 aria-describedby="description" rows=5></textarea>
                         </div>
                     </div>
+                    @error('description')
+                    <p class="row g-3 px-2 justify-content-end text-pink fs-6 mt-1">
+                        {{ $message }}
+                    </p>
+                    @enderror
                     <div class="row g-3 align-items-center mt-1 pb-3 px-2">
                         <div class="col-3 text-start">
                             <label for='start_date' name='start_date' class="col-form-label text-pink fw-bold fs-4">Quiz
@@ -50,6 +51,11 @@
                                 class="form-control border border-1 border-dark rounded-2" aria-describedby="start_date">
                         </div>
                     </div>
+                    @error('start_date')
+                    <p class="row g-3 px-2 justify-content-end text-pink fs-6 mt-1">
+                        {{ $message }}
+                    </p>
+                    @enderror
                     <div class="row g-3 align-items-center mt-1 pb-3 px-2">
                         <div class="col-3 text-start">
                             <label for='deadline' name='deadline' class="col-form-label text-pink fw-bold fs-4">Quiz
@@ -60,6 +66,11 @@
                                 class="form-control border border-1 border-dark rounded-2" aria-describedby="deadline">
                         </div>
                     </div>
+                    @error('deadline')
+                    <p class="row g-3 px-2 justify-content-end text-pink fs-6 mt-1">
+                        {{ $message }}
+                    </p>
+                    @enderror
                     <div class="row g-3 align-items-center justify-content-end mt-1 pb-3">
                         <div class="col-3 d-flex justify-content-end align-items-center">
                             <input type="checkbox" id="repeat" name='repeat' class="form-check-input" value='true'

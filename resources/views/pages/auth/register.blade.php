@@ -10,30 +10,41 @@
     <div class="col mb-3 py-3">
         <form method="POST" action="{{route('users.store')}}" class="text-center">
             @csrf
-            @if ($errors->any())
-                <div class="alert alert-danger my-1">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <div class="row py-2">
-                <label for="name" class=" text-pink fw-bold fs-4 text-start" style="margin-left: -10px">Full Name</label>
+                <label for="full_name" class=" text-pink fw-bold fs-4 text-start" style="margin-left: -10px">Full Name</label>
                 <input type="text" class="form-control border border-2 border-dark rounded" name="full_name" aria-describedby="emailHelp" placeholder="Enter full name">
+                @error('full_name')
+                <p class="text-pink fs-6 mt-1">
+                    {{ $message }}
+                </p>
+                @enderror
             </div>
             <div class="row py-2">
                 <label for="email" class=" text-pink fw-bold fs-4 text-start" style="margin-left: -10px">Email</label>
                 <input type="email" class="form-control border border-2 border-dark rounded" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                @error('email')
+                <p class="text-pink fs-6 mt-1">
+                    {{ $message }}
+                </p>
+                @enderror
             </div>
             <div class="row py-2">
                 <label for="password" class=" text-pink fw-bold fs-4 text-start" style="margin-left: -10px">Password</label>
                 <input type="password" class="form-control border border-2 border-dark rounded" name="password" placeholder="Password">
+                @error('password')
+                <p class="text-pink fs-6 mt-1">
+                    {{ $message }}
+                </p>
+                @enderror
             </div>
             <div class="row py-2">
-                <label for="password" class=" text-pink fw-bold fs-4 text-start" style="margin-left: -10px">Date of Birth</label>
+                <label for="dob" class=" text-pink fw-bold fs-4 text-start" style="margin-left: -10px">Date of Birth</label>
                 <input type="date" class="form-control border border-2 border-dark rounded" name="dob">
+                @error('dob')
+                <p class="text-pink fs-6 mt-1">
+                    {{ $message }}
+                </p>
+                @enderror
             </div>
             <div class="row py-2">
                 <label for="role_id" name="role_id" class=" text-pink fw-bold fs-4 text-start" style="margin-left: -10px">Role</label>
@@ -41,6 +52,11 @@
                     <option value= 2 >Student</option>
                     <option value= 1 >Teacher</option>
                   </select>
+                @error('role_id')
+                <p class="text-pink fs-6 mt-1">
+                    {{ $message }}
+                </p>
+                @enderror
             </div>
             <button type="submit" class="btn btn-light border border-2 border-dark mt-3 text-pink fw-bold fs-6">Register</button>
         </form>

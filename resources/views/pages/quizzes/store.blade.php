@@ -12,16 +12,8 @@
             @method("POST")
             @endif
             <h2 class='text-pink mb-4'>
-                @isset($problem) Edit @else Add New @endif @if ($type == 'mcq')Multiple Choice @else Fill in the Blanks @endif Question</h2>
-                @if ($errors->any())
-                    <div class="alert alert-danger my-1">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
+                @isset($problem) Edit @else Add New @endif @if ($type == 'mcq')Multiple Choice @else Fill in the Blanks @endif Question
+            </h2>
             <div class="row g-3 align-items-center mt-1 pb-3 px-2 border border-2 border-dark rounded">
                 <div class="col-auto">
                     <label for="question" class="col-form-label text-pink fw-bold fs-4">Q: </label>
@@ -31,7 +23,11 @@
                         class="form-control border-0 border-bottom border-2 border-dark rounded-0"
                         aria-describedby="question" @isset($problem) value="{{ $problem->question }}" @endif>
                 </div>
-                {{-- For error message, use form text!! --}}
+                @error('question')
+                    <p class="row g-3 px-4 text-pink fs-6 mt-1">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
             <div class='row g-3 pb-3 px-2 my-2 border border-2 border-dark rounded'>
                 @if ($type == 'ftb') <div class='col-auto'> @endif
@@ -56,19 +52,20 @@
                     @endif
                 @endif
             </div>
+            @error('answer')
+            <p class="row g-3 px-2 text-pink fs-6 mt-1">
+                {{ $message }}
+            </p>
+            @enderror
             <div class="row g-3 mt-1 px-1 justify-content-between">
                 <input type='file' class='col-auto btn btn-outline-danger text-pink border-dark' name='image'>
                 <button class='col-auto btn bg-turqouise text-white hover-bg-pink justify-content-center align-items-center'>Submit</button>
             </div>
+            @error('image')
+            <p class="row g-3 px-2 justify-content-end text-pink fs-6 mt-1">
+                {{ $message }}
+            </p>
+            @enderror
         </form>
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-            </div>
+    </div>
 @endsection
