@@ -31,7 +31,7 @@ class QuizSimulationController extends Controller
             $new_history->status = 0;
             $new_history->save();
         }
-        else if($history->status == 1 && $quiz->redoable==0){
+        else if($history->status == 1 && $quiz->repeat==0){
             return back();
         }
         $problems = QuizProblem::where('quiz_id', '=', $quiz_id)->paginate(1);

@@ -121,9 +121,9 @@ class QuizProblemController extends Controller
             $path = $req->file('image')->getRealPath();
             $image = file_get_contents($path);
             Storage::put("public/quizzes/".$req->file('image')->getClientOriginalName(), $image);
-            $quiz_problem->image = $req->file('image')->getClientOriginalName();
+            QuizProblem::where('index', "=", $index)->where('quiz_id', '=', $quiz_id)
+                ->update(['image'=>$req->file('image')->getClientOriginalName()]);
         }
-        $quiz_problem->save();
         return redirect(route('quizzes.edit', ['quiz_id'=>$quiz_id]));
     }
 

@@ -18,7 +18,8 @@
                         </div>
                         <div class="col-9">
                             <input type="text" id="name" name='name'
-                                class="form-control border border-1 border-dark rounded-2" aria-describedby="title">
+                                class="form-control border border-1 border-dark rounded-2" aria-describedby="title"
+                                value={{old('name')}}>
                         </div>
                     </div>
                     @error('name')
@@ -33,7 +34,7 @@
                         </div>
                         <div class="col-9">
                             <textarea id="description" name='description' class="form-control border border-1 border-dark rounded-2"
-                                aria-describedby="description" rows=5></textarea>
+                                aria-describedby="description" rows=5>{{old('description')}}</textarea>
                         </div>
                     </div>
                     @error('description')
@@ -48,7 +49,8 @@
                         </div>
                         <div class="col-9">
                             <input type="datetime-local" id="start_date" name='start_date'
-                                class="form-control border border-1 border-dark rounded-2" aria-describedby="start_date">
+                                class="form-control border border-1 border-dark rounded-2" aria-describedby="start_date"
+                                value={{old('start_date')}}>
                         </div>
                     </div>
                     @error('start_date')
@@ -63,7 +65,8 @@
                         </div>
                         <div class="col-9">
                             <input type="datetime-local" id="deadline" name='deadline'
-                                class="form-control border border-1 border-dark rounded-2" aria-describedby="deadline">
+                                class="form-control border border-1 border-dark rounded-2" aria-describedby="deadline"
+                                value={{old('deadline')}}>
                         </div>
                     </div>
                     @error('deadline')

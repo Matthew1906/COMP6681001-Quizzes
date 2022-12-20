@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
                 'role_id'=>1,
                 'full_name'=>'Charles Wilbert',
                 'email'=>'charlesw@qmail.com',
-                'password'=>bcrypt('charleswilbert'),
+                'password'=>bcrypt('charles'),
                 'dob'=>fake()->dateTimeBetween("-65 years", "-20 years"),
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
                 'role_id'=>1,
                 'full_name'=>'Bryan Djoni',
                 'email'=>'bryand@qmail.com',
-                'password'=>bcrypt('bryandjoni'),
+                'password'=>bcrypt('bryan'),
                 'dob'=>fake()->dateTimeBetween("-65 years", "-20 years"),
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
                 'role_id'=>2,
                 'full_name'=>'Matthew Adrianus Mulyono',
                 'email'=>'matthewam@qmail.com',
-                'password'=>bcrypt('matthewadrianusmulyono'),
+                'password'=>bcrypt('matthew'),
                 'dob'=>fake()->dateTimeBetween("-20 years", "-10 years"),
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
                 'role_id'=>2,
                 'full_name'=>'Sathya Narendra Atmajati Satoto',
                 'email'=>'sathyanas@qmail.com',
-                'password'=>bcrypt('sathyanarendraatmajatisatoto'),
+                'password'=>bcrypt('sathya'),
                 'dob'=>fake()->dateTimeBetween("-20 years", "-10 years"),
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()
@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
                 'role_id'=>2,
                 'full_name'=>'Joko Oey',
                 'email'=>'jokoo@qmail.com',
-                'password'=>bcrypt('jokooey'),
+                'password'=>bcrypt('joko'),
                 'dob'=>fake()->dateTimeBetween("-20 years", "-10 years"),
                 'created_at'=>Carbon::now()->toDateTimeString(),
                 'updated_at'=>Carbon::now()->toDateTimeString()

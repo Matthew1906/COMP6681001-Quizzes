@@ -42,7 +42,7 @@
                                     @if(Auth::user()->role->name == "teacher")
                                         @if ($quiz->start_date > \Carbon\Carbon::now())
                                             <span class="mx-1">{{ $quiz->name }} -
-                                                {{ \Carbon\Carbon::parse($quiz->start_date)->format('d F Y') }}
+                                                {{ \Carbon\Carbon::parse($quiz->start_date)->format('d F Y, H:i') }}
                                             </span>
                                             <a href="{{ route('quizzes.edit', ['quiz_id' => $quiz->id]) }}"
                                             class='btn btn-sm bg-orange hover-bg-pink text-white mx-1'>

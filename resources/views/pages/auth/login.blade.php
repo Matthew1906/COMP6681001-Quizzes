@@ -11,9 +11,10 @@
                 <h2 class="text-center">Login to Quizzes</h2>
                 <img src="https://i.ibb.co/JqGF3dY/pngwing-com.png" class="w-25 h-25" width="200px" height="200px" alt="">
             </div>
+            @include("components.flash-messages")
             <div class="row mb-2">
                 <label for="email" class="text-center text-pink fw-bold fs-4 mb-1">Email</label>
-                <input type="email" class="form-control border border-2 border-dark rounded" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                <input type="email" class="form-control border border-2 border-dark rounded" name="email" aria-describedby="emailHelp" placeholder="Enter email" value={{old('email')}}>
                 @error('email')
                 <p class="text-pink fs-6 mt-1">
                     {{ $message }}
