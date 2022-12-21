@@ -4,9 +4,9 @@
 
 @section('body')
     <div class='px-2 text-center'>
-            <div class="d-flex flex-column align-items-center bg-white mb-3 py-3 px-5 border border-2 border-dark rounded">
+            <div class="d-flex flex-column align-items-center bg-white mb-3 py-3 px-2 px-md-5 border border-2 border-dark rounded">
                 <div class='mx-3 flex-grow-1'>
-                    <div class="d-flex flex-column row align-items-center mt-1 pb-3 px-2 text-center">
+                    <div class="mt-1 pb-3 px-1 text-center login-container">
                         <div class="row text-center align-items-center">
                             <div class="text-center d-flex justify-content-center align-items-center mb-3">
                                 <a href="{{url()->previous()}}" class='float-start fs-2 text-turqouise ms-1'>

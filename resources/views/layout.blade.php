@@ -16,7 +16,7 @@
 </head>
 
 <body class='w-100 vh-100 d-flex flex-column'>
-    <header class="navbar navbar-dark navbar-expand-lg bg-turqouise text-primary px-3 py-0">
+    <header class="navbar navbar-dark navbar-expand-lg bg-turqouise text-primary px-3 py-2 py-lg-0">
         <div class="container-fluid">
             <a class="navbar-brand text-white fs-1" href="{{route("home")}}">Quizzes</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

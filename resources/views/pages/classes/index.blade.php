@@ -8,7 +8,7 @@
             <div class="row text-center align-items-center m-3 align-top">
                 <h1 class="text-pink fw-bold">My Classes</h1>
             </div>
-            <div class='d-flex justify-content-center align-items-center'>
+            <div class='d-flex flex-wrap justify-content-center align-items-center'>
                 @foreach ($classes as $class)
                     <div class="card me-4 mb-4">
                         <h5 class="card-header bg-orange text-white text-center">

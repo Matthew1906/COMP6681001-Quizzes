@@ -5,15 +5,15 @@
 @section('body')
     <div class="container-fluid py-1 px-5">
         <h1 class='text-primary text-black text-center font-weight-bold mb-4'>Explore available quizzes</h1>
-        <form class="input-group" action={{ route('quizzes.index') }}>
+        <form class="input-group mb-4" action={{ route('quizzes.index') }}>
             <input type="text" class="form-control rounded" placeholder="Search Quiz" name='search' />
-            <button type="submit" class="btn bg-turqouise text-primary text-white hover-bg-pink align-items-center">Search
-                Quiz
+            <button type="submit" class="btn bg-turqouise text-primary text-white hover-bg-pink align-items-center">
+                Search
             </button>
         </form>
         <div class="d-flex flex-wrap justify-content-center align-items-start">
             @foreach ($quizzes as $quiz)
-                <div class="card my-4 me-4" style="width: 20rem;">
+                <div class="card mb-3 me-4" style="width: 20rem;">
                     <div class="card-header">Deadline: {{ \Carbon\Carbon::parse($quiz->deadline)->format('l, d F Y') }}
                     </div>
                     <div class="card-body">

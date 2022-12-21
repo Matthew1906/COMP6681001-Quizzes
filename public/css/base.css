@@ -75,3 +75,13 @@
 .border-pink{
     border-color: #BF1363 !important;
 }
+
+.img-25{
+    width:100%;
+}
+
+@media(min-width:768px){
+    .img-25{
+        width:25%;
+    }
+}

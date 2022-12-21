@@ -14,7 +14,7 @@
                                 </a>
                                 <h2 class="text-turqouise fw-bold">My Profile</h2>
                             </div>
-                            <div class="d-flex flex-column align-items-start mb-3 py-3 px-5 border border-2 border-pink rounded">
+                            <div class="d-flex flex-column align-items-center mb-3 py-3 px-5 border border-2 border-pink rounded">
                                 @if (Auth::user()->role_id === 1)
                                     <h4 class="text-turqouise">Teacher: <span class='text-orange'>{{Auth::user()->full_name}}</span></h4>
                                 @else
@@ -43,7 +43,7 @@
                         </h3>
                         <ul class="d-flex flex-column align-items-start mb-3 py-3 px-5 border border-2 border-orange rounded">
                             @foreach($histories as $history)
-                                <li class="text-pink fs-5">
+                                <li class="text-pink fs-5 mb-1">
                                     <div class='d-flex align-items-center'>
                                         @if(Auth::user()->role->name=='student')
                                         <span class='fw-bold me-2'>{{ $history->quiz->name }}</span>
