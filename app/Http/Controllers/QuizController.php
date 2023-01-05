@@ -62,8 +62,8 @@ class QuizController extends Controller
         $req->validate([
             "name"=>"required|unique:quizzes|min:5|max:50",
             "description"=>'min:5|max:500',
-            "start_date"=>'required|date|after_or_equal:'.Carbon::now()->format("d/m/Y H:i"),
-            "deadline"=>'required|date|after_or_equal:'.Carbon::now()->format("d/m/Y H:i"),
+            "start_date"=>'required|date|after_or_equal:'.Carbon::now(),
+            "deadline"=>'required|date|after_or_equal:'.Carbon::now(),
         ]);
         $new_quiz = new Quiz;
         $new_quiz->class_id = $req->class;
@@ -86,8 +86,8 @@ class QuizController extends Controller
         $req->validate([
             "name"=>"required|min:5|max:50",
             "description"=>'min:5|max:500',
-            "start_date"=>'required|date|after_or_equal:'.Carbon::now()->format("d/m/Y H:i"),
-            "deadline"=>'required|date|after_or_equal:'.Carbon::now()->format("d/m/Y H:i"),
+            "start_date"=>'required|date|after_or_equal:'.Carbon::now(),
+            "deadline"=>'required|date|after_or_equal:'.Carbon::now(),
         ]);
         $quiz = Quiz::find($quiz_id);
         $quiz->name = $req->name;
